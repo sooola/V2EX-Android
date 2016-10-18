@@ -1,7 +1,6 @@
-package com.sola.gankmeizi.network;
+package com.sola.v2ex_android.network;
 
-import com.sola.gankmeizi.network.api.GankApi;
-
+import com.sola.v2ex_android.network.api.GankApi;
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;

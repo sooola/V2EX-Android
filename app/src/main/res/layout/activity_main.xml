@@ -4,7 +4,9 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar_layout"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
@@ -20,6 +22,6 @@
             android:paddingRight="2.5dp"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-    
+
 
 </android.support.design.widget.CoordinatorLayout>

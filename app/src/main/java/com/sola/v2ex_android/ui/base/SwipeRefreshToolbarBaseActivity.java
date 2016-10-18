@@ -9,7 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.sola.gankmeizi.R;
+import com.sola.v2ex_android.R;
+import com.sola.v2ex_android.ui.base.BaseActivity;
 
 import java.lang.ref.WeakReference;
 

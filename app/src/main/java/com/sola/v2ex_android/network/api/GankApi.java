@@ -1,4 +1,4 @@
-package com.sola.gankmeizi.network.api;
+package com.sola.v2ex_android.network.api;
 
 /**
  * Created by wei on 2016/10/14.

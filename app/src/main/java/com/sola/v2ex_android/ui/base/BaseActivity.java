@@ -1,4 +1,4 @@
-package com.sola.gankmeizi.ui.base;
+package com.sola.v2ex_android.ui.base;
 
 import android.support.v7.app.AppCompatActivity;
 

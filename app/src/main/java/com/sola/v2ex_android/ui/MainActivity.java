@@ -1,9 +1,9 @@
-package com.sola.gankmeizi.ui;
+package com.sola.v2ex_android.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.sola.gankmeizi.R;
+import com.sola.v2ex_android.R;
 
 public class MainActivity extends AppCompatActivity {
 

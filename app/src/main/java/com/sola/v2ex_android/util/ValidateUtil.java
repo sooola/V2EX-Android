@@ -1,4 +1,4 @@
-package com.sola.gankmeizi.util;
+package com.sola.v2ex_android.util;
 
 import java.util.List;
 import java.util.Map;
