@@ -1,25 +1,58 @@
 package com.sola.v2ex_android.ui;
 
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.sola.v2ex_android.R;
-import com.sola.v2ex_android.ui.adapter.NewestThemeAdapter;
+import com.sola.v2ex_android.model.Topics;
+import com.sola.v2ex_android.network.NetWork;
+import com.sola.v2ex_android.ui.adapter.NewestTopicsAdapter;
 import com.sola.v2ex_android.ui.base.BaseFragment;
+import com.sola.v2ex_android.util.LogUtil;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
+ * 最新话题
  * Created by wei on 2016/10/18.
  */
 
 public class NewestTopicsFragment extends BaseFragment {
 
-
     @Bind(R.id.recycleview)
     RecyclerView mRecycleview;
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private NewestThemeAdapter mAdapter;
+    private NewestTopicsAdapter mAdapter;
+
+    Observer<List<Topics>> observer = new Observer<List<Topics>>() {
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            mSwipeRefreshLayout.setRefreshing(false);
+             LogUtil.d("NewestTopicsFragment","e" + e.toString());
+            Toast.makeText(getActivity(), R.string.loading_failed, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onNext(List<Topics> items) {
+            mSwipeRefreshLayout.setRefreshing(false);
+            mAdapter.appendItems(items);
+        }
+    };
 
     @Override
     protected int getLayoutId() {
@@ -28,14 +61,24 @@ public class NewestTopicsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-//        mAdapter = new
+        setupRecyclerView();
+        loadData();
+    }
+
+    public void loadData(){
+       Subscription subscription = NetWork.getV2exApi()
+               .getTopicHot()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        addSubscription(subscription);
     }
 
     private void setupRecyclerView() {
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        mRecycleview.setLayoutManager(layoutManager);
-//        mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
-//        mRecycleview.setAdapter(mMeizhiListAdapter);
+        mAdapter = new NewestTopicsAdapter(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mRecycleview.setLayoutManager(layoutManager);
+        mRecycleview.setAdapter(mAdapter);
     }
 
 
