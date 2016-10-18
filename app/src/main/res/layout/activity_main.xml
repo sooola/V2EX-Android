@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_below="@id/toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_meizhi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="2.5dp"
+            android:paddingRight="2.5dp"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+    
+
+</android.support.design.widget.CoordinatorLayout>
