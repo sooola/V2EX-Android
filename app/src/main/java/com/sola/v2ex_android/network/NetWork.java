@@ -1,6 +1,6 @@
 package com.sola.v2ex_android.network;
 
-import com.sola.v2ex_android.network.api.GankApi;
+import com.sola.v2ex_android.network.api.V2EX;
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
@@ -13,24 +13,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *
  */
 public class NetWork {
-    public static String GANK_URL = "http://gank.io/api/";
+    public static String V2EX_URL = "https://www.v2ex.com/api/";
 
-    private static GankApi gankApi;
+    private static V2EX v2exApi;
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
 
-    public static GankApi getGankApi() {
-        if (gankApi == null) {
+    public static V2EX getV2EXApi() {
+        if (v2exApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl(GANK_URL)
+                    .baseUrl(V2EX_URL)
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
-            gankApi = retrofit.create(GankApi.class);
+            v2exApi = retrofit.create(V2EX.class);
         }
-        return gankApi;
+        return v2exApi;
     }
 
 }

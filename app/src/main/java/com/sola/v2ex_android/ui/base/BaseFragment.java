@@ -1,27 +1,34 @@
 package com.sola.v2ex_android.ui.base;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- *
- * Created by wei on 2016/10/14.
+ * Created by wei on 2016/10/18.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+
+public abstract class BaseFragment extends Fragment {
 
     private CompositeSubscription mCompositeSubscription;
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(getLayoutId(), container, false);
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
-        ButterKnife.bind(this);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
         initViews();
     }
 
@@ -42,17 +49,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.mCompositeSubscription.add(s);
     }
 
-    protected abstract int getLayoutId();
-
-    protected abstract void initViews();
-
-
-    @Override protected void onDestroy() {
-        super.onDestroy();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         ButterKnife.unbind(this);
         if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }
     }
 
+    protected abstract int getLayoutId();
+
+    protected abstract void initViews();
 }
