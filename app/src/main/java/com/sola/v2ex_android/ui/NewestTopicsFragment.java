@@ -11,6 +11,7 @@ import com.sola.v2ex_android.network.NetWork;
 import com.sola.v2ex_android.ui.adapter.NewestTopicsAdapter;
 import com.sola.v2ex_android.ui.base.BaseFragment;
 import com.sola.v2ex_android.util.LogUtil;
+import com.sola.v2ex_android.util.TextMatcher;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -43,7 +45,7 @@ public class NewestTopicsFragment extends BaseFragment {
         @Override
         public void onError(Throwable e) {
             mSwipeRefreshLayout.setRefreshing(false);
-             LogUtil.d("NewestTopicsFragment","e" + e.toString());
+            LogUtil.d("NewestTopicsFragment", "e" + e.toString());
             Toast.makeText(getActivity(), R.string.loading_failed, Toast.LENGTH_SHORT).show();
         }
 
@@ -65,14 +67,27 @@ public class NewestTopicsFragment extends BaseFragment {
         loadData();
     }
 
-    public void loadData(){
-       Subscription subscription = NetWork.getV2exApi()
-               .getTopicHot()
+    public void loadData() {
+        Subscription subscription = NetWork.getV2exApi()
+                .getTopicHot()
+                .doOnNext(new Action1<List<Topics>>() {
+                    @Override
+                    public void call(List<Topics> topicses) {
+                        setImagData(topicses);
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
         addSubscription(subscription);
     }
+
+    private void setImagData(List<Topics> topicses) {
+        for (Topics topics : topicses) {
+            topics.imgList = TextMatcher.matchImg(topics.content_rendered);
+        }
+    }
+
 
     private void setupRecyclerView() {
         mAdapter = new NewestTopicsAdapter(getActivity());
@@ -80,7 +95,6 @@ public class NewestTopicsFragment extends BaseFragment {
         mRecycleview.setLayoutManager(layoutManager);
         mRecycleview.setAdapter(mAdapter);
     }
-
 
 
     @Override

@@ -1,5 +1,7 @@
 package com.sola.v2ex_android.model;
 
+import java.util.List;
+
 /**
  * Created by wei on 2016/10/18.
  */
@@ -11,12 +13,13 @@ public class Topics {
     public String url;
     public String content;
     public String content_rendered;
-    public int replies;
+    public String replies;
     public MemberEntity member;
     public NodeEntity node;
     public int created;
     public int last_modified;
     public int last_touched;
+    public List<String> imgList;
 
     public static class MemberEntity {
         public int id;
