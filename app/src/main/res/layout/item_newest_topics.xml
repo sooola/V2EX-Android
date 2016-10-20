@@ -7,6 +7,7 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp"
+                android:id="@+id/rl_root"
                 android:background="@drawable/item_selecto_bottom_liner">
 
     <TextView

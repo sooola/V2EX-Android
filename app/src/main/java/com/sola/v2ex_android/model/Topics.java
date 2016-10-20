@@ -1,27 +1,28 @@
 package com.sola.v2ex_android.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wei on 2016/10/18.
  */
 
-public class Topics {
+public class Topics implements Serializable {
 
     public int id;
     public String title;
     public String url;
     public String content;
     public String content_rendered;
-    public String replies;
+    public int replies;
     public MemberEntity member;
     public NodeEntity node;
-    public int created;
+    public long created;
     public int last_modified;
     public int last_touched;
     public List<String> imgList;
 
-    public static class MemberEntity {
+    public static class MemberEntity implements Serializable {
         public int id;
         public String username;
         public String tagline;
@@ -30,7 +31,7 @@ public class Topics {
         public String avatar_large;
     }
 
-    public static class NodeEntity {
+    public static class NodeEntity implements Serializable {
         public int id;
         public String name;
         public String title;

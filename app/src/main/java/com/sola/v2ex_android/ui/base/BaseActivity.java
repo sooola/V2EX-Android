@@ -3,6 +3,7 @@ package com.sola.v2ex_android.ui.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -53,6 +54,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

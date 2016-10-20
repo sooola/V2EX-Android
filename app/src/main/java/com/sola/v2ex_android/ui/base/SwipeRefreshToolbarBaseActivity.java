@@ -1,4 +1,4 @@
-package com.sola.gankmeizi.ui.base;
+package com.sola.v2ex_android.ui.base;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,9 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.sola.v2ex_android.R;
-import com.sola.v2ex_android.ui.base.BaseActivity;
-
-import java.lang.ref.WeakReference;
 
 /**
  * Created by wei on 2016/10/14.
@@ -53,19 +50,6 @@ public abstract class SwipeRefreshToolbarBaseActivity extends BaseActivity {
             actionbar.setTitle(getToolBarTitle());
         }
     }
-
-
-
-
-    private static class MyHandler extends Handler {
-
-        private WeakReference<SwipeRefreshToolbarBaseActivity> mReference;
-
-        public MyHandler(SwipeRefreshToolbarBaseActivity activity) {
-            mReference = new WeakReference<>(activity);
-        }
-    }
-
 
     protected abstract String getToolBarTitle();
 

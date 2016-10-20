@@ -27,7 +27,6 @@ import rx.schedulers.Schedulers;
  * 最新话题
  * Created by wei on 2016/10/18.
  */
-
 public class NewestTopicsFragment extends BaseFragment {
 
     @Bind(R.id.recycleview)

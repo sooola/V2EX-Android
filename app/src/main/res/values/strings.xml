@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">V2EX</string>
     <string name="loading_failed">加载失败</string>
+    <string name="error_view_click_to_refresh">点击屏幕,重新加载</string>
+    <string name="error_view_no_data">暂无内容</string>
+    <string name="error_view_loading">加载中…</string>
+    <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
+    <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
+    <string name="error_view_nodata_error_click_to_refresh">暂无数据</string>
+    <string name="tip_network_error">没有可用的网络</string>
+    <string name="function_select">功能选择</string>
+    <string name="take_photo">拍照</string>
+    <string name="get_photo_from_gallery">从相册获取</string>
+    <string name="input_words_count">还可以输入%d字</string>
+    <string name="replies_count">全部评论 (%d)</string>
 </resources>
