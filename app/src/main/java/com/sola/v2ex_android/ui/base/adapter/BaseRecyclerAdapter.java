@@ -46,8 +46,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
 
     @Override
     public void onBindViewHolder(BaseRecyclerViewHolder holder, int position) {
-        bindData((holder), position, mData.get(position));
+        bindData(holder, position, mData.get(position));
     }
+
 
     public void cleanData()
     {
@@ -97,6 +98,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         mData = data;
         notifyDataSetChanged();
     }
+
 
     @Override
     public int getItemViewType(int position) {

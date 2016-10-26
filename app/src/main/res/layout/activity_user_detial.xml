@@ -2,26 +2,29 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                  xmlns:app="http://schemas.android.com/apk/res-auto"
                                                  android:layout_width="match_parent"
-                                                 android:layout_height="match_parent" >
+                                                 android:layout_height="match_parent"
+                                                 xmlns:tools="http://schemas.android.com/tools">
 
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/user_detial_head_hight"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/coll_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
+            app:contentScrim="?attr/colorPrimaryDark"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="@dimen/user_detial_head_hight"
+                android:background="@color/colorPrimary"
+                app:layout_collapseMode="parallax"
+                >
 
                 <ImageView
                     android:id="@+id/iv_user_icon"
@@ -37,19 +40,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_centerHorizontal="true"
-                    android:text="用户名啊啊"
+                    tools:text="用户名啊啊"
                     android:textColor="@color/white"/>
 
                 <TextView
-                    android:text="已经加入v2ex60天了"
+                    android:id="@+id/tv_already_join_day"
                     android:layout_marginTop="8dp"
                     android:layout_centerHorizontal="true"
+                    android:alpha="0.7"
+                    tools:text="已经加入X天了"
                     android:layout_below="@id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-
-
-
 
             </RelativeLayout>
 
@@ -59,48 +61,25 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
+                android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"  />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="奥斯卡打开速度，明显这么想，怎么新农村，名字，
-            毛主席农村，美女自行车找，虚拟充值，没小馋猫，现在才最新，模拟操作，
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-                        毛主席农村，美女自行车找，虚拟充值，没小馋猫，现在才最新，模拟操作，
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-                        毛主席农村，美女自行车找，虚拟充值，没小馋猫，现在才最新，模拟操作，
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
-            "
-            android:textSize="20sp" />
+            android:layout_height="match_parent"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

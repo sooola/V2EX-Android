@@ -12,6 +12,7 @@ import com.sola.v2ex_android.network.NetWork;
 import com.sola.v2ex_android.ui.adapter.TopicsDetialAdapter;
 import com.sola.v2ex_android.ui.base.adapter.BaseRecycleActivity;
 import com.sola.v2ex_android.ui.base.adapter.BaseRecyclerAdapter;
+import com.sola.v2ex_android.util.LogUtil;
 
 import java.util.List;
 
@@ -20,14 +21,13 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
  * 主题详情
  * Created by wei on 2016/10/20.
  */
-
 public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
 
     public static final String KEY_TOPIC = "key_topic";
@@ -55,34 +55,40 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
         refreshing();
     }
 
-    Observer<List<Replies>> observer = new Observer<List<Replies>>() {
+    Observer<NodeDetial> observer = new Observer<NodeDetial>() {
         @Override
         public void onCompleted() {
         }
 
         @Override
         public void onError(Throwable e) {
+             LogUtil.d("TopicsDetialActivity","e" + e.toString());
             loadDataCompleteNoData();
         }
 
         @Override
-        public void onNext(List<Replies> items) {
-            loadDataSuccess(items);
+        public void onNext(NodeDetial items) {
+            mJoinCount.setText(String.format(TopicsDetialActivity.this.getResources().getString(R.string.node_start) ,items.stars));
+            loadDataSuccess(items.replies);
         }
     };
 
     @Override
     protected void sendRequestData() {
-        Subscription subscription = NetWork.getV2exApi().getNodeDetial(mTopics.node.name).flatMap(new Func1<NodeDetial, Observable<List<Replies>>>() {
-            @Override
-            public Observable<List<Replies>> call(NodeDetial nodeDetial) {
-                mJoinCount.setText("已经有 " + nodeDetial.stars + " 人关注");
+        loadData();
+    }
 
-                return NetWork.getRepliesApi().getReplise(mTopics.id);
+    private void loadData() {
+        Subscription subscription = Observable.zip(NetWork.getV2exApi().getNodeDetial(mTopics.node.name), NetWork.getUserApi().getReplise(mTopics.id), new Func2<NodeDetial, List<Replies>, NodeDetial>() {
+            @Override
+            public NodeDetial call(NodeDetial nodeDetial, List<Replies> replies) {
+                nodeDetial.replies = replies;
+                return nodeDetial;
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+
         addSubscription(subscription);
     }
 

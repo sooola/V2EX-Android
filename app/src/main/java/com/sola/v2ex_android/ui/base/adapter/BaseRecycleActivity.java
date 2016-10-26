@@ -10,12 +10,11 @@ import android.support.v7.widget.Toolbar;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.ui.base.BaseActivity;
 import com.sola.v2ex_android.ui.base.view.BaseSpacesItemDecoration;
+import com.sola.v2ex_android.util.LogUtil;
 import com.sola.v2ex_android.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import butterknife.Bind;
 
 /**
  * 列表通用模板
@@ -24,10 +23,7 @@ import butterknife.Bind;
 
 public abstract class BaseRecycleActivity <T> extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener  {
 
-    @Bind(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    @Bind(R.id.recyclerView)
     public RecyclerView mRecyclerView;
 
     private ActionBar mActionbar;
@@ -46,7 +42,10 @@ public abstract class BaseRecycleActivity <T> extends BaseActivity implements Sw
     @Override
     protected void initViews() {
         mHandle = new MyHandler(this);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         LogUtil.d("BaseRecycleActivity","mRecy" + mRecyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);

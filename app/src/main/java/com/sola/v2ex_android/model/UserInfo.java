@@ -1,5 +1,7 @@
 package com.sola.v2ex_android.model;
 
+import java.util.List;
+
 /**
  * Created by wei on 2016/10/25.
  */
@@ -39,6 +41,8 @@ public class UserInfo {
     public String avatar_mini;
     public String avatar_normal;
     public String avatar_large;
-    public int created;
+    public long created;
+
+    public List<Topics> topicsList;
 
 }

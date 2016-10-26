@@ -32,8 +32,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="16dp"
-        android:maxLines="2"
-        android:ellipsize="end"
         android:textColor="#333333"
         tools:text="啊盛大盛大速度"
         android:layout_marginRight="8dp"/>

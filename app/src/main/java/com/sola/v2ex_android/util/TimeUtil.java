@@ -47,6 +47,24 @@ public class TimeUtil {
         return dateToStr(date);
     }
 
+    public static String alreadyJoinData(long time) {
+        Date date = new Date(time);
+
+        Calendar now = getCal();
+        String t = new SimpleDateFormat("HH:mm").format(date);
+
+        // 第一种情况，日期在同一天
+        String curDate = dateFormat.get().format(now.getTime());
+        String paramDate = dateFormat.get().format(date);
+        if (curDate.equals(paramDate)) {
+            return  "已经加入v2ex 1 天";
+        }
+
+        // 第二种情况，不在同一天
+        int days = (int) ((getBegin(getDate()).getTime() - getBegin(date).getTime()) / 86400000);
+        return  "已经加入v2ex " + days + " 天";
+    }
+
     /**
      * 返回日期的0点:2012-07-07 20:20:20 --> 2012-07-07 00:00:00
      */

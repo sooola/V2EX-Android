@@ -1,7 +1,8 @@
 package com.sola.v2ex_android.network;
 
-import com.sola.v2ex_android.network.api.RepliesApi;
+import com.sola.v2ex_android.network.api.UserApi;
 import com.sola.v2ex_android.network.api.V2EXApi;
+
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
@@ -17,7 +18,7 @@ public class NetWork {
     public static String V2EX_URL = "https://www.v2ex.com/api/";
 
     private static V2EXApi v2exApi;
-    private static RepliesApi repliesApi;
+    private static UserApi userApi;
 
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
@@ -36,17 +37,17 @@ public class NetWork {
         return v2exApi;
     }
 
-    public static RepliesApi getRepliesApi() {
-        if (repliesApi == null) {
+    public static UserApi getUserApi() {
+        if (userApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
                     .baseUrl(V2EX_URL)
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
-            repliesApi = retrofit.create(RepliesApi.class);
+            userApi = retrofit.create(UserApi.class);
         }
-        return repliesApi;
+        return userApi;
     }
 
 }

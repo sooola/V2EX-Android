@@ -3,6 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
     >
 
 
@@ -49,7 +50,7 @@
         android:layout_marginTop="4dp"
         android:textSize="12dp"
         android:alpha="0.5"
-        android:text="已经加入X人"
+        tools:text="已经加入X人"
         android:textColor="@color/white"/>
 
     </RelativeLayout>

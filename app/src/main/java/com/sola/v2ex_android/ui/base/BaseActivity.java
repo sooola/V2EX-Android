@@ -15,8 +15,8 @@ import rx.subscriptions.CompositeSubscription;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private CompositeSubscription mCompositeSubscription;
 
+    private CompositeSubscription mCompositeSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
