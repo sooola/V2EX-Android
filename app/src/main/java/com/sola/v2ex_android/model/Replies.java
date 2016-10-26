@@ -11,7 +11,7 @@ public class Replies {
     public String content;
     public String content_rendered;
     public MemberEntity member;
-    public int created;
+    public long created;
     public int last_modified;
 
     @Override

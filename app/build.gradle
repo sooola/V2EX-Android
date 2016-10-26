@@ -21,7 +21,7 @@ android {
     }
 
     productFlavors {
-        _debug {
+        _develop {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             manifestPlaceholders = [CHANNEL_NAME: "DEVELOP"]
         }

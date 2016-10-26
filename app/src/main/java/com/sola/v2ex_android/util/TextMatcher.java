@@ -28,14 +28,9 @@ public class TextMatcher {
         while(imageMatcher.find()) {
             String image = imageMatcher.group().trim();
             srcMatcher = IMAGE_SRC_PATTERN.matcher(image);
-             LogUtil.d("TextMatcher","image   " + image);
             String src = null;
             if (srcMatcher.find()) {
-
-                LogUtil.d("TextMatcher22"," srcMatcher.group().trim()   " +  srcMatcher.group().trim());
-
                 src = getTextBetweenQuotation(srcMatcher.group().trim().substring(4));
-                LogUtil.d("TextMatcher","src   " + src);
             }
             if (TextUtils.isEmpty(src)) {
                 continue;

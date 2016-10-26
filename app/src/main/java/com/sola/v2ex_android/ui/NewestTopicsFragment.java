@@ -16,7 +16,6 @@ import com.sola.v2ex_android.util.TextMatcher;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -93,12 +92,5 @@ public class NewestTopicsFragment extends BaseFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycleview.setLayoutManager(layoutManager);
         mRecycleview.setAdapter(mAdapter);
-    }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

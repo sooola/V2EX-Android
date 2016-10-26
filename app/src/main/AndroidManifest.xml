@@ -31,6 +31,11 @@
 
             android:name=".ui.TopicsDetialActivity"
             />
+
+        <activity
+
+            android:name=".ui.UserDetialActivity"
+            />
     </application>
 
     <meta-data

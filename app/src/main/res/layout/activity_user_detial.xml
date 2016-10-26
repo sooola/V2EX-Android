@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent" >
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/coll_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/iv_user_icon"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_below="@id/iv_user_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="用户名啊啊"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:text="已经加入v2ex60天了"
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+            </RelativeLayout>
+
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:layout_collapseMode="pin"  />
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="奥斯卡打开速度，明显这么想，怎么新农村，名字，
+            毛主席农村，美女自行车找，虚拟充值，没小馋猫，现在才最新，模拟操作，
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+                        毛主席农村，美女自行车找，虚拟充值，没小馋猫，现在才最新，模拟操作，
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+                        毛主席农村，美女自行车找，虚拟充值，没小馋猫，现在才最新，模拟操作，
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做没想吃你做
+            "
+            android:textSize="20sp" />
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

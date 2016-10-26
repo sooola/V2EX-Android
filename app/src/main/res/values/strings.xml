@@ -13,4 +13,5 @@
     <string name="get_photo_from_gallery">从相册获取</string>
     <string name="input_words_count">还可以输入%d字</string>
     <string name="replies_count">全部评论 (%d)</string>
+    <string name="node_start">已经有 %d 人关注</string>
 </resources>

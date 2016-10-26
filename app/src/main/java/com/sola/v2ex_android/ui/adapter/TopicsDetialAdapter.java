@@ -1,10 +1,12 @@
 package com.sola.v2ex_android.ui.adapter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.Replies;
 import com.sola.v2ex_android.model.Topics;
+import com.sola.v2ex_android.ui.UserDetialActivity;
 import com.sola.v2ex_android.ui.base.adapter.BaseRecyclerAdapter;
 import com.sola.v2ex_android.ui.base.adapter.BaseRecyclerViewHolder;
 import com.sola.v2ex_android.util.ContentUtils;
@@ -61,18 +63,31 @@ public class TopicsDetialAdapter extends BaseRecyclerAdapter<Replies> {
     @Override
     public void bindData(BaseRecyclerViewHolder holder, int position, Replies item) {
         if (getItemViewType(position) == TYPE_HEADER){
-            Topics.MemberEntity member = mTopics.member;
+            final Topics.MemberEntity member = mTopics.member;
             GlideUtil.glideWithImg(mContext ,"http:"+member.avatar_normal ,holder.getImageView(R.id.iv_user_icon));
             holder.setText(R.id.tv_username , member.username);
             holder.setText(R.id.tv_title , mTopics.title);
             holder.setText(R.id.tv_publish_time , TimeUtil.friendlyFormat(mTopics.created * 1000));
             RichText.from(ContentUtils.formatContent(mTopics.content_rendered)).into(holder.getTextView(R.id.tv_content));
             holder.setText(R.id.tv_replies_count , String.format(mContext.getResources().getString(R.string.replies_count) ,mTopics.replies));
+            holder.setOnClickListener(R.id.iv_user_icon, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.getContext().startActivity(UserDetialActivity.getIntent(v.getContext() ,member.username ));
+                }
+            });
         }else {
-            Replies.MemberEntity repliMember = item.member;
+            final Replies.MemberEntity repliMember = item.member;
             GlideUtil.glideWithImg(mContext ,"http:"+repliMember.avatar_normal ,holder.getImageView(R.id.iv_user_icon));
             holder.setText(R.id.tv_username , repliMember.username);
-            holder.setText(R.id.tv_comment_content , item.content);
+            RichText.from(ContentUtils.formatContent(item.content)).into(holder.getTextView(R.id.tv_comment_content));
+            holder.setText(R.id.tv_time , TimeUtil.friendlyFormat(item.created * 1000));
+            holder.setOnClickListener(R.id.iv_user_icon, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.getContext().startActivity(UserDetialActivity.getIntent(v.getContext() ,repliMember.username ));
+                }
+            });
         }
     }
 }
