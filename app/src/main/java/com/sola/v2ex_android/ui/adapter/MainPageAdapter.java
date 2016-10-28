@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
 import com.sola.v2ex_android.ui.NewestTopicsFragment;
+import com.sola.v2ex_android.ui.NodeFragment;
 
 /**
  * Created by wei on 2016/10/18.
@@ -23,7 +24,7 @@ public class MainPageAdapter extends FragmentPagerAdapter {
         if (0 == position){
             return new NewestTopicsFragment();
         }else {
-            return new NewestTopicsFragment();
+            return new NodeFragment();
         }
     }
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:paddingLeft="8dp"
+              android:paddingRight="8dp"
+              android:layout_marginTop="4dp"
+              android:layout_marginBottom="4dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/bg_corner__stroken_ffffff"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv_node_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#333333"
+            android:text="python"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textSize="12dp"
+            android:textColor="#666666"
+            android:layout_alignBottom="@id/tv_node_title"
+            android:text="帖子 1006"
+            android:layout_toRightOf="@id/tv_node_title"
+            />
+
+        <TextView
+            android:layout_below="@id/tv_node_title"
+            android:layout_marginTop="4dp"
+            android:text="一个更好的世界需要你持续地提出好问题"
+            android:textColor="#999999"
+            android:maxLines="2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/bg_corner__stroken_ffffff"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv_node2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:layout_marginTop="4dp"
+            android:text="python"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textSize="12dp"
+            android:layout_alignBottom="@id/tv_node2_title"
+            android:text="帖子 1006"
+            android:textColor="#666666"
+            android:layout_toRightOf="@id/tv_node2_title"
+            />
+
+        <TextView
+            android:layout_below="@id/tv_node2_title"
+            android:text="一个更好的世界需要你持续地提出好问题"
+            android:textColor="#999999"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

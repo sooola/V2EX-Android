@@ -6,7 +6,7 @@ import java.util.List;
  * Created by wei on 2016/10/24.
  */
 
-public class NodeDetial {
+public class NodeInfo {
     /**
      * id : 300
      * name : programmer
@@ -36,5 +36,7 @@ public class NodeDetial {
     public String avatar_normal;
     public String avatar_large;
 
-    public List<Replies> replies;
+    public List<Replies> replies;     //主题详情使用，记录用户回复
+
+    public List<Topics> topicsList;     //节点使用，记录某个节点的所有话题
 }

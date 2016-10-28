@@ -11,16 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sola.v2ex_android.R;
+import com.sola.v2ex_android.model.NodeInfo;
 import com.sola.v2ex_android.model.Topics;
-import com.sola.v2ex_android.model.UserInfo;
 import com.sola.v2ex_android.network.NetWork;
 import com.sola.v2ex_android.ui.adapter.TopicsAdapter;
 import com.sola.v2ex_android.ui.base.BaseSwipeRefreshActivity;
 import com.sola.v2ex_android.util.Constants;
+import com.sola.v2ex_android.util.ContentUtils;
 import com.sola.v2ex_android.util.GlideUtil;
 import com.sola.v2ex_android.util.LogUtil;
-import com.sola.v2ex_android.util.TimeUtil;
 import com.sola.v2ex_android.util.ToastUtil;
+import com.zzhoujay.richtext.RichText;
 
 import java.util.List;
 
@@ -33,14 +34,13 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
- * 用户详情
- * Created by wei on 2016/10/21.
+ * Created by wei on 2016/10/27.
  */
 
-public class UserDetialActivity extends BaseSwipeRefreshActivity {
+public class NodeDetialActivity extends BaseSwipeRefreshActivity {
 
-    public static final String KEY_USERNAME = "key_username";
-    private String mUserName;
+    public static final String KEY_NODENAME = "key_nodename";
+    private String mNodeName;
     private TopicsAdapter mAdapter;
 
     @Bind(R.id.toolbar)
@@ -51,21 +51,21 @@ public class UserDetialActivity extends BaseSwipeRefreshActivity {
     RecyclerView mRecycleview;
     @Bind(R.id.coll_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @Bind(R.id.iv_user_icon)
+    @Bind(R.id.iv_node_icon)
     ImageView mUserIcon;
-    @Bind(R.id.tv_username)
-    TextView mUserNameTv;
-    @Bind(R.id.tv_already_join_day)
-    TextView mAlreadyJoinDay;
+    @Bind(R.id.tv_nodename)
+    TextView mNodeNameTv;
+    @Bind(R.id.tv_header)
+    TextView mHeader;
 
-    public static Intent getIntent(Context context, String userName) {
-        Intent intent = new Intent(context, UserDetialActivity.class);
-        intent.putExtra(KEY_USERNAME, userName);
+    public static Intent getIntent(Context context, String nodeName) {
+        Intent intent = new Intent(context, NodeDetialActivity.class);
+        intent.putExtra(KEY_NODENAME, nodeName);
         return intent;
     }
 
 
-    Observer<UserInfo> observer = new Observer<UserInfo>() {
+    Observer<NodeInfo> observer = new Observer<NodeInfo>() {
         @Override
         public void onCompleted() {
         }
@@ -73,15 +73,15 @@ public class UserDetialActivity extends BaseSwipeRefreshActivity {
         @Override
         public void onError(Throwable e) {
             setSwipeRefreshLayoutRefresh(false);
-             LogUtil.d("UserDetialActivity","e" +e.toString());
+            LogUtil.d("UserDetialActivity","e" +e.toString());
             ToastUtil.showShort(R.string.loading_failed);
         }
 
         @Override
-        public void onNext(UserInfo items) {
-            GlideUtil.glideWithCircleImg(UserDetialActivity.this, Constants.makeUserLogo(items.avatar_normal), mUserIcon);
-            mUserNameTv.setText(mUserName);
-            mAlreadyJoinDay.setText(TimeUtil.alreadyJoinData(items.created * 1000));
+        public void onNext(NodeInfo items) {
+            GlideUtil.glideWithCircleImg(NodeDetialActivity.this, Constants.makeUserLogo(items.avatar_normal), mUserIcon);
+            mNodeNameTv.setText(mNodeName);
+            RichText.from(ContentUtils.formatContent(items.header)).into(mHeader);
             mAdapter.appendItems(items.topicsList);
             setSwipeRefreshLayoutRefresh(false);
         }
@@ -89,20 +89,20 @@ public class UserDetialActivity extends BaseSwipeRefreshActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_user_detial;
+        return R.layout.activity_node_detial;
     }
 
     @Override
     protected void initViews() {
-        mUserName = getIntent().getStringExtra(KEY_USERNAME);
+        mNodeName = getIntent().getStringExtra(KEY_NODENAME);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 LogUtil.d("UserDetialActivity", "verticalOffset" + verticalOffset);
-                if (-verticalOffset >= 245) {
-                    mCollapsingToolbarLayout.setTitle(mUserName);
+                if (-verticalOffset >= 142) {
+                    mCollapsingToolbarLayout.setTitle(mNodeName);
                 } else {
                     mCollapsingToolbarLayout.setTitle("");
                 }
@@ -115,9 +115,9 @@ public class UserDetialActivity extends BaseSwipeRefreshActivity {
 
     private void loadData() {
         setSwipeRefreshLayoutRefresh(true);
-        Subscription subscription = Observable.zip(NetWork.getUserApi().getUserInfo(mUserName), NetWork.getUserApi().getTopicsByUserName(mUserName), new Func2<UserInfo, List<Topics>, UserInfo>() {
+        Subscription subscription = Observable.zip(NetWork.getV2exApi().getNodeDetial(mNodeName), NetWork.getV2exApi().getTopicsByNodeName(mNodeName), new Func2<NodeInfo, List<Topics>, NodeInfo>() {
             @Override
-            public UserInfo call(UserInfo userInfo, List<Topics> topicses) {
+            public NodeInfo call(NodeInfo userInfo, List<Topics> topicses) {
                 userInfo.topicsList = topicses;
                 return userInfo;
             }

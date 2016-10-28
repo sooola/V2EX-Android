@@ -12,6 +12,6 @@
         android:layout_centerVertical="true"
         android:paddingLeft="16dp"
         tools:text="16-4-1"
-        android:textColor="#999999" />
+        android:textColor="@color/divisiveTextColor" />
 
 </RelativeLayout>

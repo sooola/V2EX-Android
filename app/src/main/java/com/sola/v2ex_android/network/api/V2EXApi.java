@@ -1,6 +1,6 @@
 package com.sola.v2ex_android.network.api;
 
-import com.sola.v2ex_android.model.NodeDetial;
+import com.sola.v2ex_android.model.NodeInfo;
 import com.sola.v2ex_android.model.Topics;
 
 import java.util.List;
@@ -21,10 +21,10 @@ public interface V2EXApi {
     Observable<List<Topics>> getTopicLatest();
 
     @GET("nodes/show.json")     //节点详情
-    Observable<NodeDetial> getNodeDetial(@Query("name") String name);
+    Observable<NodeInfo> getNodeDetial(@Query("name") String name);
 
     @GET("nodes/all.json")     //获取所有节点
-    Observable<NodeDetial> getAllNode(@Query("name") String name);
+    Observable<NodeInfo> getAllNode(@Query("name") String name);
 
     @GET("topics/show.json")       //根据节点名获取所有帖子
     Observable<List<Topics>> getTopicsByNodeName(@Query("node_name") String node_name);

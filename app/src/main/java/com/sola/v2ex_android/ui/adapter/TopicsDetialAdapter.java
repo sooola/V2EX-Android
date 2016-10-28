@@ -38,7 +38,7 @@ public class TopicsDetialAdapter extends BaseRecyclerAdapter<Replies> {
 
     @Override
     public int getItemCount() {
-        return mData != null ? mData.size() + 1:0;
+        return mData != null ? mData.size() + 1:1;
     }
 
     @Override

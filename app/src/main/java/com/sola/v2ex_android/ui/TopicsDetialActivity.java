@@ -2,10 +2,11 @@ package com.sola.v2ex_android.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.sola.v2ex_android.R;
-import com.sola.v2ex_android.model.NodeDetial;
+import com.sola.v2ex_android.model.NodeInfo;
 import com.sola.v2ex_android.model.Replies;
 import com.sola.v2ex_android.model.Topics;
 import com.sola.v2ex_android.network.NetWork;
@@ -17,6 +18,7 @@ import com.sola.v2ex_android.util.LogUtil;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -32,11 +34,13 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
 
     public static final String KEY_TOPIC = "key_topic";
     private Topics mTopics;
+    private String mNodeNameStr;
 
-    @Bind(R.id.tv_node_name)
-    TextView mNodeName;
-    @Bind(R.id.tv_join_count)
-    TextView mJoinCount;
+    @Bind(R.id.tv_node_name) TextView mNodeName;
+    @Bind(R.id.tv_join_count) TextView mJoinCount;
+    @OnClick(R.id.rl_to_node_detial) void submit(View view) {
+        view.getContext().startActivity(NodeDetialActivity.getIntent(this ,mNodeNameStr));
+    }
 
 
     public static Intent getIntent(Context context, Topics topic) {
@@ -55,7 +59,7 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
         refreshing();
     }
 
-    Observer<NodeDetial> observer = new Observer<NodeDetial>() {
+    Observer<NodeInfo> observer = new Observer<NodeInfo>() {
         @Override
         public void onCompleted() {
         }
@@ -67,7 +71,8 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
         }
 
         @Override
-        public void onNext(NodeDetial items) {
+        public void onNext(NodeInfo items) {
+            mNodeNameStr = items.name;
             mJoinCount.setText(String.format(TopicsDetialActivity.this.getResources().getString(R.string.node_start) ,items.stars));
             loadDataSuccess(items.replies);
         }
@@ -79,11 +84,11 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
     }
 
     private void loadData() {
-        Subscription subscription = Observable.zip(NetWork.getV2exApi().getNodeDetial(mTopics.node.name), NetWork.getUserApi().getReplise(mTopics.id), new Func2<NodeDetial, List<Replies>, NodeDetial>() {
+        Subscription subscription = Observable.zip(NetWork.getV2exApi().getNodeDetial(mTopics.node.name), NetWork.getUserApi().getReplise(mTopics.id), new Func2<NodeInfo, List<Replies>, NodeInfo>() {
             @Override
-            public NodeDetial call(NodeDetial nodeDetial, List<Replies> replies) {
-                nodeDetial.replies = replies;
-                return nodeDetial;
+            public NodeInfo call(NodeInfo nodeInfo, List<Replies> replies) {
+                nodeInfo.replies = replies;
+                return nodeInfo;
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -96,6 +101,8 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
     protected void onViewCreate() {
         mTopics = (Topics) getIntent().getSerializableExtra(KEY_TOPIC);
         mNodeName.setText(mTopics.node.title);
+        
+        LogUtil.d("TopicsDetialActivity","mTopics.content_rendered" + mTopics.content_rendered);
     }
 
     @Override

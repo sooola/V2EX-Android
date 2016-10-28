@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.ui.base.BaseActivity;
 import com.sola.v2ex_android.ui.base.view.BaseSpacesItemDecoration;
-import com.sola.v2ex_android.util.LogUtil;
 import com.sola.v2ex_android.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
@@ -45,7 +44,6 @@ public abstract class BaseRecycleActivity <T> extends BaseActivity implements Sw
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-         LogUtil.d("BaseRecycleActivity","mRecy" + mRecyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);

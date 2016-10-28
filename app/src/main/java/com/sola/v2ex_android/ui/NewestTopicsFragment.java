@@ -10,7 +10,6 @@ import com.sola.v2ex_android.model.TopicsData;
 import com.sola.v2ex_android.network.NetWork;
 import com.sola.v2ex_android.ui.adapter.TopicsAdapter;
 import com.sola.v2ex_android.ui.base.BaseFragment;
-import com.sola.v2ex_android.util.LogUtil;
 import com.sola.v2ex_android.util.TextMatcher;
 import com.sola.v2ex_android.util.ToastUtil;
 
@@ -45,7 +44,6 @@ public class NewestTopicsFragment extends BaseFragment {
         @Override
         public void onError(Throwable e) {
             mSwipeRefreshLayout.setRefreshing(false);
-            LogUtil.d("NewestTopicsFragment", "e" + e.toString());
             ToastUtil.showShort( R.string.loading_failed);
         }
 
@@ -54,8 +52,7 @@ public class NewestTopicsFragment extends BaseFragment {
             mSwipeRefreshLayout.setRefreshing(false);
             int hotTopicsSize = items.hotTopics.size();
             mAdapter.setHotTopicsSize(hotTopicsSize);
-            items.hotTopics.add(hotTopicsSize , items.hotTopics.get(hotTopicsSize - 1));
-             LogUtil.d("NewestTopicsFragment","items.allTopics"  + items.allTopics.size());
+            items.allTopics.add(hotTopicsSize , items.hotTopics.get(hotTopicsSize - 1));
             mAdapter.appendItems(items.allTopics);
         }
     };
@@ -79,27 +76,13 @@ public class NewestTopicsFragment extends BaseFragment {
                 setImagData(latestTopics);
                 TopicsData topicsData = new TopicsData();
                 topicsData.hotTopics = hotTopics;
-//                topicsData.latestTopics = latestTopics;
-                hotTopics.addAll(latestTopics);
-//                Collections.addAll(hotTopics , latestTopics)
-//                topicsData.allTopics = ;
+                latestTopics.addAll(0 , hotTopics);
+                topicsData.allTopics = latestTopics;
                 return topicsData;
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-
-//        Subscription subscription = NetWork.getV2exApi()
-//                .getTopicHot()
-//                .doOnNext(new Action1<List<Topics>>() {
-//                    @Override
-//                    public void call(List<Topics> topicses) {
-//                        setImagData(topicses);
-//                    }
-//                })
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(observer);
         addSubscription(subscription);
     }
 

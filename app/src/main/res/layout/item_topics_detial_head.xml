@@ -55,13 +55,14 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_below="@id/tv_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
 
     <TextView
         android:layout_below="@id/tv_content"
-        android:layout_marginTop="16dp"
         android:id="@+id/tv_replies_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
         android:paddingLeft="8dp"
         android:textColor="#555555"
         tools:text="quanhu"
-        android:background="#E9E9E9"
+        android:background="#e9e9e9"
         />
 
 
