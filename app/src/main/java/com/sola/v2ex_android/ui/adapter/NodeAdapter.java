@@ -28,15 +28,15 @@ public class NodeAdapter implements ExpandableListAdapter {
 
     private Context mContext;
 
-    public NodeAdapter(Context context){
+    public NodeAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
 
-        for (int i = 0 ;i < 5 ; i++){
+        for (int i = 0; i < 2; i++) {
             NodeGroup group = new NodeGroup();
             group.groupTitle = "西游记";
             group.childrenList = new ArrayList<>();
-            for (int j = 0 ; j < 5 ;j++){
+            for (int j = 0; j < 2; j++) {
                 NodeChildren children = new NodeChildren();
                 children.title = "唐三藏";
                 group.childrenList.add(children);
@@ -78,7 +78,7 @@ public class NodeAdapter implements ExpandableListAdapter {
 
     @Override
     public long getGroupId(int groupPosition) {
-        return groupPosition;
+        return this.nodeGroup.get(groupPosition).hashCode();
     }
 
     @Override
@@ -97,18 +97,28 @@ public class NodeAdapter implements ExpandableListAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_node_expan_group_item, parent, false);
             groupViewHolder = new GroupViewHolder();
-            groupViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.label_expand_group);
+//            groupViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.label_expand_group);
             convertView.setTag(groupViewHolder);
         } else {
             groupViewHolder = (GroupViewHolder) convertView.getTag();
         }
-         LogUtil.d("NodeAdapter","groupPosition" + groupPosition);
-        groupViewHolder.tvTitle.setText( nodeGroup.get(groupPosition).groupTitle);
+        LogUtil.d("NodeAdapter", "groupPosition" + groupPosition);
+        groupViewHolder.tvTitle.setText(nodeGroup.get(groupPosition).groupTitle);
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+//        ChildViewHolder childViewHolder;
+//        if (convertView != null) {
+//            return convertView;
+//        }
+//        convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_node_expan_child_item, parent, false);
+//        childViewHolder = new ChildViewHolder();
+//        childViewHolder.childContent = (LinearLayout) convertView.findViewById(R.id.child_content);
+//        convertView.setTag(childViewHolder);
+//        return convertView;
+
         ChildViewHolder childViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_node_expan_child_item, parent, false);
@@ -120,7 +130,8 @@ public class NodeAdapter implements ExpandableListAdapter {
         }
         childViewHolder.childContent.removeAllViews();
         List<NodeChildren> nodechildrenList = nodeGroup.get(groupPosition).childrenList;
-         LogUtil.d("NodeAdapter","nodechildrenList size" + nodechildrenList.size());
+        LogUtil.d("NodeAdapter"," getChildView -- groupPosition" + groupPosition);
+         LogUtil.d("NodeAdapter","getChildView -- nodechildrenList size" + nodechildrenList.size());
         for (int i = 0; i < nodechildrenList.size(); i++) {
              LogUtil.d("NodeAdapter","i" + i);
            View childContent =  mInflater.inflate(R.layout.layout_node_expan_child_content , childViewHolder.childContent , false);
@@ -170,6 +181,7 @@ public class NodeAdapter implements ExpandableListAdapter {
     static class GroupViewHolder {
         TextView tvTitle;
     }
+
     static class ChildViewHolder {
         LinearLayout childContent;
     }

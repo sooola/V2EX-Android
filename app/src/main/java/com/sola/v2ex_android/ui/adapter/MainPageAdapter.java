@@ -13,7 +13,7 @@ import com.sola.v2ex_android.ui.NodeFragment;
 
 public class MainPageAdapter extends FragmentPagerAdapter {
 
-    private final String[] titles = { "最新主题", "热门主题"};
+    private final String[] titles = { "主题", "节点"};
 
     public MainPageAdapter(FragmentManager fm) {
         super(fm);
