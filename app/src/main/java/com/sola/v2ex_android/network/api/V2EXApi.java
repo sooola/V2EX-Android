@@ -24,7 +24,7 @@ public interface V2EXApi {
     Observable<NodeInfo> getNodeDetial(@Query("name") String name);
 
     @GET("nodes/all.json")     //获取所有节点
-    Observable<NodeInfo> getAllNode(@Query("name") String name);
+    Observable<List<NodeInfo>> getAllNode();
 
     @GET("topics/show.json")       //根据节点名获取所有帖子
     Observable<List<Topics>> getTopicsByNodeName(@Query("node_name") String node_name);

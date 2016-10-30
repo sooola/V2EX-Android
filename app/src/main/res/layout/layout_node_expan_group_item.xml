@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_group_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#f5f5f5"
         android:paddingBottom="8dp"
         android:paddingTop="8dp">
 
@@ -33,6 +33,13 @@
             android:textSize="16dp" />
 
     </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="2dp"
+        android:layout_height="1px"
+        android:background="#e7e7e7" />
 
     <LinearLayout
         android:id="@+id/ll_expand_children_content"

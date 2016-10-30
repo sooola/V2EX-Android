@@ -102,7 +102,6 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
         mTopics = (Topics) getIntent().getSerializableExtra(KEY_TOPIC);
         mNodeName.setText(mTopics.node.title);
         
-        LogUtil.d("TopicsDetialActivity","mTopics.content_rendered" + mTopics.content_rendered);
     }
 
     @Override

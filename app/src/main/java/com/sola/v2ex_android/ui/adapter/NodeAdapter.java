@@ -32,17 +32,17 @@ public class NodeAdapter implements ExpandableListAdapter {
         mContext = context;
         mInflater = LayoutInflater.from(context);
 
-        for (int i = 0; i < 2; i++) {
-            NodeGroup group = new NodeGroup();
-            group.groupTitle = "西游记";
-            group.childrenList = new ArrayList<>();
-            for (int j = 0; j < 2; j++) {
-                NodeChildren children = new NodeChildren();
-                children.title = "唐三藏";
-                group.childrenList.add(children);
-            }
-            nodeGroup.add(group);
-        }
+//        for (int i = 0; i < 2; i++) {
+//            NodeGroup group = new NodeGroup();
+//            group.groupTitle = "西游记";
+//            group.childrenList = new ArrayList<>();
+//            for (int j = 0; j < 2; j++) {
+//                NodeChildren children = new NodeChildren();
+//                children.title = "唐三藏";
+//                group.childrenList.add(children);
+//            }
+//            nodeGroup.add(group);
+//        }
     }
 
 
@@ -119,25 +119,25 @@ public class NodeAdapter implements ExpandableListAdapter {
 //        convertView.setTag(childViewHolder);
 //        return convertView;
 
-        ChildViewHolder childViewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_node_expan_child_item, parent, false);
-            childViewHolder = new ChildViewHolder();
-            childViewHolder.childContent = (LinearLayout) convertView.findViewById(R.id.child_content);
-            convertView.setTag(childViewHolder);
-        } else {
-            childViewHolder = (ChildViewHolder) convertView.getTag();
-        }
-        childViewHolder.childContent.removeAllViews();
-        List<NodeChildren> nodechildrenList = nodeGroup.get(groupPosition).childrenList;
-        LogUtil.d("NodeAdapter"," getChildView -- groupPosition" + groupPosition);
-         LogUtil.d("NodeAdapter","getChildView -- nodechildrenList size" + nodechildrenList.size());
-        for (int i = 0; i < nodechildrenList.size(); i++) {
-             LogUtil.d("NodeAdapter","i" + i);
-           View childContent =  mInflater.inflate(R.layout.layout_node_expan_child_content , childViewHolder.childContent , false);
-            ((TextView)childContent.findViewById(R.id.tv_node_title)).setText(nodechildrenList.get(i).title);
-            childViewHolder.childContent.addView(childContent);
-        }
+//        ChildViewHolder childViewHolder;
+//        if (convertView == null) {
+//            convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_node_expan_child_item, parent, false);
+//            childViewHolder = new ChildViewHolder();
+//            childViewHolder.childContent = (LinearLayout) convertView.findViewById(R.id.child_content);
+//            convertView.setTag(childViewHolder);
+//        } else {
+//            childViewHolder = (ChildViewHolder) convertView.getTag();
+//        }
+//        childViewHolder.childContent.removeAllViews();
+//        List<NodeChildren> nodechildrenList = nodeGroup.get(groupPosition).childrenList;
+//        LogUtil.d("NodeAdapter"," getChildView -- groupPosition" + groupPosition);
+//         LogUtil.d("NodeAdapter","getChildView -- nodechildrenList size" + nodechildrenList.size());
+//        for (int i = 0; i < nodechildrenList.size(); i++) {
+//             LogUtil.d("NodeAdapter","i" + i);
+//           View childContent =  mInflater.inflate(R.layout.layout_node_expan_child_content , childViewHolder.childContent , false);
+//            ((TextView)childContent.findViewById(R.id.tv_node_title)).setText(nodechildrenList.get(i).title);
+//            childViewHolder.childContent.addView(childContent);
+//        }
 
 //        childViewHolder.tvTitle.setText( nodeGroup.get(groupPosition).childrenList.get(childPosition).title);
         return convertView;
