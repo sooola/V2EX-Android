@@ -10,6 +10,6 @@ public class NodeGroup {
 
     public String groupTitle;
 
-    public List<NodeInfo> childrenList;
+    public List<String> childrenTitleList;
 
 }

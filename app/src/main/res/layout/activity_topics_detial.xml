@@ -33,7 +33,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:tint="@color/white"
-            android:src="@mipmap/list_icon_arrow"/>
+            android:src="@drawable/ic_chevron_right_black_24dp"/>
 
         <TextView
             android:id="@+id/tv_node_name"

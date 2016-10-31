@@ -1,41 +1,28 @@
 package com.sola.v2ex_android.ui;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sola.v2ex_android.R;
-import com.sola.v2ex_android.model.NodeChildren;
-import com.sola.v2ex_android.model.NodeGroup;
 import com.sola.v2ex_android.model.NodeInfo;
-import com.sola.v2ex_android.model.Topics;
 import com.sola.v2ex_android.network.NetWork;
-import com.sola.v2ex_android.ui.adapter.NodeAdapter;
 import com.sola.v2ex_android.ui.base.BaseFragment;
-import com.sola.v2ex_android.util.Constants;
-import com.sola.v2ex_android.util.ContentUtils;
-import com.sola.v2ex_android.util.GlideUtil;
 import com.sola.v2ex_android.util.LogUtil;
+import com.sola.v2ex_android.util.NodeDataUtil;
 import com.sola.v2ex_android.util.ToastUtil;
 import com.zzhoujay.richtext.RichText;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
-import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
@@ -45,11 +32,15 @@ import rx.schedulers.Schedulers;
 
 public class NodeFragment extends BaseFragment {
 
+    private String[] mTechnologyGroupTitle = new String[] { "程序员", "Python", "iDev", "Android","Linux" ,"node.js"};
+    private String[] mCreativeGroupTitle = new String[] { "分享创造", "设计", "奇思妙想"};
+    private String[] mFunGroupTitle = new String[] { "分享发现", "电子游戏", "电影" , "旅行"};
+    private String[] mCoolGroupTitle = new String[] { "酷工作", "求职", "职场话题"};
+    private String[] mTransactionGroupTitle = new String[] { "二手交易", "物物交换", "免费赠送" , "域名"};
+    private boolean mIsFirst = true;
+
     @Bind(R.id.ll_root)
     LinearLayout mContentLl;
-
-    private Map<String, List<NodeInfo>> nodeSortMap = new LinkedHashMap<>();
-
 
     Observer<List<NodeInfo>> observer = new Observer<List<NodeInfo>>() {
         @Override
@@ -64,44 +55,13 @@ public class NodeFragment extends BaseFragment {
 
         @Override
         public void onNext(List<NodeInfo> items) {
-            List<NodeInfo> technologyGroup = new ArrayList<>();
-            List<NodeInfo> creativeGroup = new ArrayList<>();
-            List<NodeInfo> funGroup = new ArrayList<>();
-            List<NodeInfo> coolJodGroup = new ArrayList<>();
-            List<NodeInfo> transactionGroup = new ArrayList<>();
-
-            for (NodeInfo item : items) {
-                if (item.title.equals("程序员") || item.title.equals("Python") || item.title.equals("iDev") ||
-                        item.title.equals("Android") || item.title.equals("Linux") || item.title.equals("node.js")
-                        || item.title.equals("云计算")
-                        ) {
-                    technologyGroup.add(item);
-                }
-                if (item.title.equals("分享创造") || item.title.equals("设计") || item.title.equals("奇思妙想")) {
-                    creativeGroup.add(item);
-                }
-                if (item.title.equals("分享发现") || item.title.equals("电子游戏") || item.title.equals("电影")
-                        || item.title.equals("旅行")
-                        ) {
-                    funGroup.add(item);
-                }
-
-                if (item.title.equals("酷工作") || item.title.equals("求职") || item.title.equals("职场话题")
-                        ) {
-                    coolJodGroup.add(item);
-                }
-                if (item.title.equals("二手交易") || item.title.equals("物物交换") || item.title.equals("免费赠送") || item.title.equals("域名")
-                        ) {
-                    transactionGroup.add(item);
-                }
-            }
-            nodeSortMap.put("技术", technologyGroup);
-            nodeSortMap.put("创意", creativeGroup);
-            nodeSortMap.put("好玩", funGroup);
-            nodeSortMap.put("酷工作", coolJodGroup);
-            nodeSortMap.put("交易", transactionGroup);
-
-            initView();
+            Map<String, List<NodeInfo>> nodeSortMap = NodeDataUtil.filterDataToGroup(items , NodeDataUtil.createGroup("技术" ,mTechnologyGroupTitle)
+                    ,NodeDataUtil.createGroup("创意" ,mCreativeGroupTitle)
+                    ,NodeDataUtil.createGroup("好玩" ,mFunGroupTitle)
+                    ,NodeDataUtil.createGroup("酷工作" ,mCoolGroupTitle)
+                    ,NodeDataUtil.createGroup("交易" ,mTransactionGroupTitle)
+            );
+            initData(nodeSortMap);
         }
     };
 
@@ -116,7 +76,7 @@ public class NodeFragment extends BaseFragment {
         loadData();
     }
 
-    private void initView() {
+    private void initData(Map<String, List<NodeInfo>> nodeSortMap) {
         Iterator iter = nodeSortMap.entrySet().iterator();
         while (iter.hasNext()) {
             Map.Entry entry = (Map.Entry) iter.next();
@@ -126,6 +86,7 @@ public class NodeFragment extends BaseFragment {
             final View groupItem = LayoutInflater.from(getActivity()).inflate(R.layout.layout_node_expan_group_item, mContentLl, false);
             ((TextView) groupItem.findViewById(R.id.tv_group_title)).setText(groupTitle);
             final LinearLayout childrenContent = (LinearLayout) groupItem.findViewById(R.id.ll_expand_children_content);
+            final ImageView arrowIcon = (ImageView) groupItem.findViewById(R.id.iv_arrow_icon);
             final View line =  groupItem.findViewById(R.id.line);
 
             groupItem.setOnClickListener(new View.OnClickListener() {
@@ -138,16 +99,19 @@ public class NodeFragment extends BaseFragment {
                             view.setTag(R.id.group_item, false);
                             childrenContent.setVisibility(View.GONE);
                             line.setVisibility(View.VISIBLE);
+                            arrowIcon.setImageResource(R.drawable.ic_chevron_right_black_24dp);
                         } else {
                             //打开状态
                             view.setTag(R.id.group_item, true);
                             childrenContent.setVisibility(View.VISIBLE);
                             line.setVisibility(View.INVISIBLE);
+                            arrowIcon.setImageResource(R.drawable.ic_expand_more_black_24dp);
                         }
                     } else {
                         //第一次展开
                         view.setTag(R.id.group_item, true);
                         childrenContent.setVisibility(View.VISIBLE);
+                        arrowIcon.setImageResource(R.drawable.ic_expand_more_black_24dp);
                         line.setVisibility(View.INVISIBLE);
                     }
 
@@ -162,22 +126,22 @@ public class NodeFragment extends BaseFragment {
                         childContent.findViewById(R.id.rl_left).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                ToastUtil.showShort(nodeinfo.title);
+                                view.getContext().startActivity(NodeDetialActivity.getIntent(view.getContext() ,nodeinfo.name));
                             }
                         });
 
+                        //一排显示2个子内容
                         if (i+ 1 != childrenList.size()){
                             final NodeInfo nextNodeinfo = childrenList.get(i + 1);
-                            ((TextView) childContent.findViewById(R.id.tv_node_title_right)).setText(nextNodeinfo.title);
+                            ((TextView) childContent.findViewById(R.id.tv_node_title_right)).setText(nextNodeinfo.title_alternative);
                             RichText.from(nextNodeinfo.header).into(((TextView) childContent.findViewById(R.id.tv_header_right)));
                             ((TextView) childContent.findViewById(R.id.tv_topics_count_left)).setText(String.format(childContent.getResources().getString(R.string.topics_count) ,nextNodeinfo.topics));
                             childContent.findViewById(R.id.rl_right).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    ToastUtil.showShort(nextNodeinfo.title);
+                                    view.getContext().startActivity(NodeDetialActivity.getIntent(view.getContext() ,nextNodeinfo.name));
                                 }
                             });
-
                             i++;
                         }else {
                             childContent.findViewById(R.id.rl_right).setVisibility(View.INVISIBLE);
@@ -186,6 +150,12 @@ public class NodeFragment extends BaseFragment {
                     }
                 }
             });
+            if (mIsFirst){
+                //默认展开第一项
+                groupItem.performClick();
+                mIsFirst = false;
+            }
+
             mContentLl.addView(groupItem);
         }
     }

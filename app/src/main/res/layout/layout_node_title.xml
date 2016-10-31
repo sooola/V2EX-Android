@@ -15,7 +15,7 @@
             android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:src="@mipmap/list_icon_arrow"
+            android:src="@drawable/ic_chevron_right_black_24dp"
             android:tint="#333333"/>
 
         <TextView

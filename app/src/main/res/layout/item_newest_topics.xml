@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/tv_publish_at"
         android:layout_toRightOf="@id/tv_publish_at"
-        android:text="Android"
+        tools:text="Android"
         android:textSize="12dp"
         android:layout_marginLeft="2dp"
         android:textColor="#639B70"/>
@@ -98,7 +98,8 @@
         android:id="@+id/tv_review_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="222"
+        tools:text="222"
+        android:textSize="12dp"
         android:layout_alignBottom="@id/tv_username"
         android:layout_alignParentRight="true"
         android:textColor="#AAAAAA"
@@ -106,10 +107,10 @@
 
     <ImageView
         android:layout_toLeftOf="@id/tv_review_count"
-        android:background="#558894"
         android:layout_width="12dp"
         android:layout_marginRight="6dp"
-        android:layout_marginBottom="2dp"
+        android:tint="#AAAAAA"
+        android:src="@drawable/ic_chat_black_24dp"
         android:layout_alignBottom="@id/tv_review_count"
         android:layout_height="12dp"/>
 

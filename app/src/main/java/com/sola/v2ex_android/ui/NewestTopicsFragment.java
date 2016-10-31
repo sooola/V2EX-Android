@@ -1,6 +1,5 @@
 package com.sola.v2ex_android.ui;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -9,7 +8,7 @@ import com.sola.v2ex_android.model.Topics;
 import com.sola.v2ex_android.model.TopicsData;
 import com.sola.v2ex_android.network.NetWork;
 import com.sola.v2ex_android.ui.adapter.TopicsAdapter;
-import com.sola.v2ex_android.ui.base.BaseFragment;
+import com.sola.v2ex_android.ui.base.BaseSwipeRefreshFragment;
 import com.sola.v2ex_android.util.TextMatcher;
 import com.sola.v2ex_android.util.ToastUtil;
 
@@ -24,15 +23,13 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
- * 最新话题
+ * 主页 -  话题
  * Created by wei on 2016/10/18.
  */
-public class NewestTopicsFragment extends BaseFragment {
+public class NewestTopicsFragment extends BaseSwipeRefreshFragment {
 
     @Bind(R.id.recycleview)
     RecyclerView mRecycleview;
-    @Bind(R.id.swipeRefreshLayout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private TopicsAdapter mAdapter;
 
@@ -43,13 +40,13 @@ public class NewestTopicsFragment extends BaseFragment {
 
         @Override
         public void onError(Throwable e) {
-            mSwipeRefreshLayout.setRefreshing(false);
+            setSwipeRefreshLayoutRefresh(false);
             ToastUtil.showShort( R.string.loading_failed);
         }
 
         @Override
         public void onNext(TopicsData items) {
-            mSwipeRefreshLayout.setRefreshing(false);
+            setSwipeRefreshLayoutRefresh(false);
             int hotTopicsSize = items.hotTopics.size();
             mAdapter.setHotTopicsSize(hotTopicsSize);
             items.allTopics.add(hotTopicsSize , items.hotTopics.get(hotTopicsSize - 1));
@@ -64,6 +61,7 @@ public class NewestTopicsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        setSwipeRefreshLayoutRefresh(true);
         setupRecyclerView();
         loadData();
     }
@@ -98,5 +96,10 @@ public class NewestTopicsFragment extends BaseFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecycleview.setLayoutManager(layoutManager);
         mRecycleview.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onRefresh() {
+        loadData();
     }
 }

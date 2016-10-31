@@ -6,6 +6,8 @@ package com.sola.v2ex_android.util;
 
 public class Constants {
 
+    public static String V2EX_URL = "https://www.v2ex.com/api/";
+
     public static String makeUserLogo(String url){
         return "http:" + url;
     }

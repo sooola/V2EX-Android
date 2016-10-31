@@ -79,7 +79,7 @@ public class NodeDetialActivity extends BaseSwipeRefreshActivity {
 
         @Override
         public void onNext(NodeInfo items) {
-            GlideUtil.glideWithCircleImg(NodeDetialActivity.this, Constants.makeUserLogo(items.avatar_normal), mUserIcon);
+            GlideUtil.glideWithCircleImg(NodeDetialActivity.this, Constants.makeUserLogo(items.avatar_large), mUserIcon);
             mNodeNameTv.setText(mNodeName);
             RichText.from(ContentUtils.formatContent(items.header)).into(mHeader);
             mAdapter.appendItems(items.topicsList);
