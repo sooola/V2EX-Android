@@ -16,12 +16,12 @@ import rx.Observable;
 
 public interface UserApi {
 
-    @GET("/api/replies/show.json")      //帖子回复
+    @GET("replies/show.json")      //帖子回复
     Observable<List<Replies>> getReplise(@Query("topic_id") int topic_id);
 
     @GET("members/show.json")     //获取用户详情
     Observable<UserInfo> getUserInfo(@Query("username") String username);
 
-    @GET("/api/topics/show.json")   //用户发的帖子
+    @GET("topics/show.json")   //用户发的帖子
     Observable<List<Topics>> getTopicsByUserName(@Query("username") String username);
 }
