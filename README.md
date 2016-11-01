@@ -13,9 +13,3 @@ v1.0 第一版本
 主题收藏
 关注用户
 签到
-
-#Screenshot
-![image](https://github.com/sooola/V2EX-Android/blob/master/screenshots/s0.png)
-![image](https://github.com/sooola/V2EX-Android/blob/master/screenshots/s1.png)
-![image](https://github.com/sooola/V2EX-Android/blob/master/screenshots/s2.png)
-![image](https://github.com/sooola/V2EX-Android/blob/master/screenshots/s3.png)
