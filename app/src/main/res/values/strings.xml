@@ -15,4 +15,10 @@
     <string name="replies_count">全部评论 (%d)</string>
     <string name="node_start">已经有 %d 人关注</string>
     <string name="topics_count">帖子 %d</string>
+    <string name="title_activity_main22">Main22Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

@@ -18,7 +18,8 @@
                 android:layout_height="38dp"
                 android:minHeight="38dp"
                 app:tabIndicatorColor="@android:color/white"
-                app:tabTextColor="@android:color/white"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/white_5"
                 app:tabMode="fixed"/>
 
     </android.support.design.widget.AppBarLayout>

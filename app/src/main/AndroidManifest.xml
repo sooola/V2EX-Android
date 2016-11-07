@@ -13,37 +13,27 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
+    <meta-data
+        android:name="UMENG_CHANNEL"
+        android:value="${CHANNEL_NAME}"/>
+
     <application
-        android:allowBackup="true"
         android:name=".ui.base.application.MyApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.Main22Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity
-
-            android:name=".ui.TopicsDetialActivity"
-            />
-
-        <activity
-            android:name=".ui.UserDetialActivity"
-            />
-
-        <activity
-            android:name=".ui.NodeDetialActivity"
-            />
+        <activity android:name=".ui.TopicsDetialActivity"/>
+        <activity android:name=".ui.UserDetialActivity"/>
+        <activity android:name=".ui.NodeDetialActivity"/>
     </application>
-
-    <meta-data
-        android:name="UMENG_CHANNEL"
-        android:value="${CHANNEL_NAME}"/>
 
 </manifest>

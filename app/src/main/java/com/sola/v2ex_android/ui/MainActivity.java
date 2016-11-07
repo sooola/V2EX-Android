@@ -6,11 +6,11 @@ import android.support.v4.view.ViewPager;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.ui.adapter.MainPageAdapter;
-import com.sola.v2ex_android.ui.base.BaseActivity;
+import com.sola.v2ex_android.ui.base.BaseFragment;
 
 import butterknife.Bind;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseFragment {
 
     @Bind(R.id.vp_main)
     ViewPager mVpMain;
