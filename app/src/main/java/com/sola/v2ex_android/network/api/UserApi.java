@@ -4,11 +4,12 @@ import com.sola.v2ex_android.model.Replies;
 import com.sola.v2ex_android.model.Topics;
 import com.sola.v2ex_android.model.UserInfo;
 
+import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.RequestBody;
 import retrofit2.Response;
-import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -34,16 +35,13 @@ public interface UserApi {
     Observable<Response<String>> getProfileInfo();
 
     @GET("signin")      //登录
-    Observable<Response<String>> loginWithUsername();
+    Observable<String> loginWithUsername();
 
 
-    @Headers({
-            "Origin: https://www.v2ex.com",
-            "Referer: https://www.v2ex.com/signin",
-            "Content-Type: application/x-www-form-urlencoded",
-    })
-    @POST("signin")      //登录
-    Observable<Response<String>> postLogin(@Body RequestBody requestBody);
+    @FormUrlEncoded
+    @Headers("Referer: https://www.v2ex.com/signin")
+    @POST("signin")
+    Observable<String> postLogin(@FieldMap HashMap<String, String> hashMap);
 
 
 }

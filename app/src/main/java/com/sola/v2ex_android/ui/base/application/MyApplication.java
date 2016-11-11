@@ -3,6 +3,7 @@ package com.sola.v2ex_android.ui.base.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.sola.v2ex_android.util.SharedPreferencesUtils;
 import com.sola.v2ex_android.util.ToastUtil;
 
 public class MyApplication extends Application {
@@ -15,6 +16,7 @@ public class MyApplication extends Application {
         //获取Context
         context = getApplicationContext();
         ToastUtil.init(this);
+        SharedPreferencesUtils.init(this);
     }
 
     //返回

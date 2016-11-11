@@ -3,6 +3,7 @@ package com.sola.v2ex_android.network;
 import com.sola.v2ex_android.network.api.UserApi;
 import com.sola.v2ex_android.network.api.V2EXApi;
 import com.sola.v2ex_android.util.Constants;
+import com.sola.v2ex_android.util.PersistentCookieStore;
 
 import java.io.IOException;
 
@@ -28,6 +29,7 @@ public class NetWork {
     private static UserApi userApi;
     private static UserApi userLoginApi;
     private static UserApi postLoginApi;
+    private PersistentCookieStore mPersistentCookieStore;
 
     private static OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -73,19 +75,6 @@ public class NetWork {
             userLoginApi = retrofit.create(UserApi.class);
         }
         return userLoginApi;
-    }
-
-    public static UserApi getPostLoginApi() {
-        if (postLoginApi == null) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .client(okHttpClient)
-                    .baseUrl(Constants.V2EX_BASE_URL)
-                    .addConverterFactory(ScalarsConverterFactory.create())
-                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
-                    .build();
-            postLoginApi = retrofit.create(UserApi.class);
-        }
-        return postLoginApi;
     }
 
     public static OkHttpClient genericClient() {

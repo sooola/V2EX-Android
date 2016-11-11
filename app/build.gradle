@@ -57,4 +57,5 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'io.reactivex:rxjava:1.0.10'
     compile 'org.jsoup:jsoup:1.10.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
 }

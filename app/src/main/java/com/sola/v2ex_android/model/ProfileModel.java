@@ -25,9 +25,9 @@ public class ProfileModel implements Parcelable {
 
     public String username;
     public String avatar;
-    public int nodes;
-    public int topics;
-    public int followings;
+    public int nodes;       //关注的节点
+    public int topics;          //发表的话题
+    public int followings;      //关注的人
     public int notifications;
 
     public ProfileModel() {
@@ -142,5 +142,17 @@ public class ProfileModel implements Parcelable {
                 followings,
                 notifications
         });
+    }
+
+    @Override
+    public String toString() {
+        return "ProfileModel{" +
+                "username='" + username + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", nodes=" + nodes +
+                ", topics=" + topics +
+                ", followings=" + followings +
+                ", notifications=" + notifications +
+                '}';
     }
 }
