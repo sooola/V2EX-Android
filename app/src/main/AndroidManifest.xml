@@ -17,6 +17,9 @@
         android:name="UMENG_CHANNEL"
         android:value="${CHANNEL_NAME}"/>
 
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
     <application
         android:name=".ui.base.application.MyApplication"
         android:allowBackup="true"
@@ -34,6 +37,15 @@
         <activity android:name=".ui.TopicsDetialActivity"/>
         <activity android:name=".ui.UserDetialActivity"/>
         <activity android:name=".ui.NodeDetialActivity"/>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/title_activity_login">
+        </activity>
+
+        <activity
+            android:name=".ui.MyNodeActivity"
+            android:label="@string/title_activity_mynode">
+        </activity>
     </application>
 
 </manifest>

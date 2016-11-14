@@ -24,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         initViews();
+        loadData();
     }
 
     public CompositeSubscription getCompositeSubscription() {
@@ -46,6 +47,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getLayoutId();
 
     protected abstract void initViews();
+
+    public void loadData(){
+
+    }
 
 
     @Override protected void onDestroy() {

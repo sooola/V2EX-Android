@@ -1,7 +1,9 @@
 package com.sola.v2ex_android.network.api;
 
 import com.sola.v2ex_android.model.NodeInfo;
+import com.sola.v2ex_android.model.Replies;
 import com.sola.v2ex_android.model.Topics;
+import com.sola.v2ex_android.model.UserInfo;
 
 import java.util.List;
 
@@ -28,4 +30,13 @@ public interface V2EXApi {
 
     @GET("topics/show.json")       //根据节点名获取所有帖子
     Observable<List<Topics>> getTopicsByNodeName(@Query("node_name") String node_name);
+
+    @GET("replies/show.json")      //帖子回复
+    Observable<List<Replies>> getReplise(@Query("topic_id") int topic_id);
+
+    @GET("members/show.json")     //获取用户详情
+    Observable<UserInfo> getUserInfo(@Query("username") String username);
+
+    @GET("topics/show.json")   //用户发的帖子
+    Observable<List<Topics>> getTopicsByUserName(@Query("username") String username);
 }

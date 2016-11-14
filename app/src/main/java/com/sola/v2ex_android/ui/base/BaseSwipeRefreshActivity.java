@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 
 import com.sola.v2ex_android.R;
 
@@ -17,18 +18,28 @@ public abstract class BaseSwipeRefreshActivity extends BaseActivity implements S
 
     SwipeRefreshLayout mSwipeRefreshLayout;
     public Handler mHandle;
+    Toolbar mToolbar;
+
+    @Override
+    public void onRefresh() {
+
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHandle = new MyHandler(this);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (null != mSwipeRefreshLayout){
             mSwipeRefreshLayout.setOnRefreshListener(this);
             mSwipeRefreshLayout.setColorSchemeResources(
                     android.R.color.holo_green_light, android.R.color.holo_blue_bright,
                     android.R.color.holo_orange_light, android.R.color.holo_red_light);
         }
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void setSwipeRefreshEnabled(boolean isEnable){

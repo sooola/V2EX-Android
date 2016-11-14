@@ -121,8 +121,13 @@ public class SharedPreferencesUtils
 	}
 
 	public static void remove(Context context ,String key){
-		SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences sp = mContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
 		sp.edit().remove(key).apply();
+	}
+
+	public static void clear(){
+		SharedPreferences sp = mContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+		sp.edit().clear();
 	}
 
 }

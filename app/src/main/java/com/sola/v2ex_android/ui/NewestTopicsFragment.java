@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.Topics;
 import com.sola.v2ex_android.model.TopicsData;
-import com.sola.v2ex_android.network.NetWork;
+import com.sola.v2ex_android.network.V2exService;
 import com.sola.v2ex_android.ui.adapter.TopicsAdapter;
 import com.sola.v2ex_android.ui.base.BaseSwipeRefreshFragment;
 import com.sola.v2ex_android.util.TextMatcher;
@@ -67,7 +67,7 @@ public class NewestTopicsFragment extends BaseSwipeRefreshFragment {
     }
 
     public void loadData() {
-        Subscription subscription = Observable.zip(NetWork.getV2exApi().getTopicHot(), NetWork.getV2exApi().getTopicLatest(), new Func2<List<Topics>, List<Topics>, TopicsData>() {
+        Subscription subscription = Observable.zip(V2exService.getInstance().getV2exApi().getTopicHot(), V2exService.getInstance().getV2exApi().getTopicLatest(), new Func2<List<Topics>, List<Topics>, TopicsData>() {
             @Override
             public TopicsData call(List<Topics> hotTopics, List<Topics> latestTopics) {
                 setImagData(hotTopics);

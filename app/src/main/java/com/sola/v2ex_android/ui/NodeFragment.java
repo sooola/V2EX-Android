@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.NodeInfo;
-import com.sola.v2ex_android.network.NetWork;
+import com.sola.v2ex_android.network.V2exService;
 import com.sola.v2ex_android.ui.base.BaseFragment;
 import com.sola.v2ex_android.util.LogUtil;
 import com.sola.v2ex_android.util.NodeDataUtil;
@@ -161,7 +161,7 @@ public class NodeFragment extends BaseFragment {
     }
 
     private void loadData() {
-        Subscription subscription = NetWork.getV2exApi().getAllNode()
+        Subscription subscription = V2exService.getInstance().getV2exApi().getAllNode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

@@ -6,14 +6,13 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.NodeInfo;
 import com.sola.v2ex_android.model.Topics;
-import com.sola.v2ex_android.network.NetWork;
+import com.sola.v2ex_android.network.V2exService;
 import com.sola.v2ex_android.ui.adapter.TopicsAdapter;
 import com.sola.v2ex_android.ui.base.BaseSwipeRefreshActivity;
 import com.sola.v2ex_android.util.Constants;
@@ -43,8 +42,6 @@ public class NodeDetialActivity extends BaseSwipeRefreshActivity {
     private String mNodeName;
     private TopicsAdapter mAdapter;
 
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
     @Bind(R.id.appbarlayout)
     AppBarLayout mAppBarLayout;
     @Bind(R.id.recyclerView)
@@ -95,8 +92,6 @@ public class NodeDetialActivity extends BaseSwipeRefreshActivity {
     @Override
     protected void initViews() {
         mNodeName = getIntent().getStringExtra(KEY_NODENAME);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -109,13 +104,12 @@ public class NodeDetialActivity extends BaseSwipeRefreshActivity {
             }
         });
         setupRecyclerView();
-        loadData();
-
     }
 
-    private void loadData() {
+    @Override
+    public void loadData() {
         setSwipeRefreshLayoutRefresh(true);
-        Subscription subscription = Observable.zip(NetWork.getV2exApi().getNodeDetial(mNodeName), NetWork.getV2exApi().getTopicsByNodeName(mNodeName), new Func2<NodeInfo, List<Topics>, NodeInfo>() {
+        Subscription subscription = Observable.zip(V2exService.getInstance().getV2exApi().getNodeDetial(mNodeName), V2exService.getInstance().getV2exApi().getTopicsByNodeName(mNodeName), new Func2<NodeInfo, List<Topics>, NodeInfo>() {
             @Override
             public NodeInfo call(NodeInfo userInfo, List<Topics> topicses) {
                 userInfo.topicsList = topicses;

@@ -9,7 +9,7 @@ import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.NodeInfo;
 import com.sola.v2ex_android.model.Replies;
 import com.sola.v2ex_android.model.Topics;
-import com.sola.v2ex_android.network.NetWork;
+import com.sola.v2ex_android.network.V2exService;
 import com.sola.v2ex_android.ui.adapter.TopicsDetialAdapter;
 import com.sola.v2ex_android.ui.base.adapter.BaseRecycleActivity;
 import com.sola.v2ex_android.ui.base.adapter.BaseRecyclerAdapter;
@@ -83,8 +83,9 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
         loadData();
     }
 
-    private void loadData() {
-        Subscription subscription = Observable.zip(NetWork.getV2exApi().getNodeDetial(mTopics.node.name), NetWork.getUserApi().getReplise(mTopics.id), new Func2<NodeInfo, List<Replies>, NodeInfo>() {
+    @Override
+    public void loadData() {
+        Subscription subscription = Observable.zip(V2exService.getInstance().getV2exApi().getNodeDetial(mTopics.node.name), V2exService.getInstance().getV2exApi().getReplise(mTopics.id), new Func2<NodeInfo, List<Replies>, NodeInfo>() {
             @Override
             public NodeInfo call(NodeInfo nodeInfo, List<Replies> replies) {
                 nodeInfo.replies = replies;
