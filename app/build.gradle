@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 23
     buildToolsVersion "24.0.1"
     defaultConfig {
@@ -14,12 +15,25 @@ android {
         buildConfigField "boolean", "LOG_DEBUG", "false"
         vectorDrawables.useSupportLibrary = true
     }
+
+    signingConfigs {
+        config  {
+            keyAlias 'main'
+            keyPassword '15913878451'
+            storeFile file('D:/keystore/main.jks')
+            storePassword '15913878451'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
+
+
 
     productFlavors {
         _develop {
@@ -29,12 +43,24 @@ android {
         _main {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             manifestPlaceholders = [CHANNEL_NAME: "MAIN"]
+            signingConfig signingConfigs.config
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+
+                def fileName = outputFile.name.replace(".apk", "_" + defaultConfig.versionName + ".apk").replace("app-", "v2ex_").replaceAll("-", "_")
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
