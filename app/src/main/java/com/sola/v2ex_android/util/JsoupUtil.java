@@ -1,6 +1,7 @@
 package com.sola.v2ex_android.util;
 
 import com.sola.v2ex_android.model.LoginResult;
+import com.sola.v2ex_android.model.MyFollowing;
 import com.sola.v2ex_android.model.MyNode;
 
 import org.jsoup.Jsoup;
@@ -52,6 +53,11 @@ public class JsoupUtil {
         return params;
     }
 
+    /**
+     * 解析我关注的节点
+     * @param response
+     * @return
+     */
     public static List<MyNode> parseMyNodeInfo(String response){
         List<MyNode> myNodeList = new ArrayList<>();
         Document doc = Jsoup.parse(response);
@@ -63,9 +69,6 @@ public class JsoupUtil {
             for (Element tdNode : aNodes) {
                 MyNode mynode = new MyNode();
                 String hrefStr = tdNode.attr("href");
-                LogUtil.d("JsoupUtil22","href indexOf" + hrefStr.substring(4));
-                String content = tdNode.toString();
-                LogUtil.d("JsoupUtil","content" + content);
                 Elements avatarNode = tdNode.getElementsByTag("img");
                 if (avatarNode != null) {
                     String avatarString = avatarNode.attr("src");
@@ -80,5 +83,33 @@ public class JsoupUtil {
             }
         }
         return myNodeList;
+    }
+
+    public static List<MyFollowing> parseMyfollowing(String response){
+        List<MyFollowing> myfollowingList = new ArrayList<>();
+        Document doc = Jsoup.parse(response);
+        Element body = doc.body();
+        Element mainElement = body.getElementById("Main");
+        Elements itemElements =  mainElement.getElementsByClass("cell item");
+        for (Element itemElement : itemElements) {
+            MyFollowing myfollow = new MyFollowing();
+            Elements titleElements = itemElement.getElementsByClass("item_title");
+            Elements nodeElements = itemElement.getElementsByClass("node");
+            Elements hrefElements = itemElement.getElementsByAttribute("href");
+            myfollow.title = titleElements.text();
+            myfollow.nodeName =  nodeElements.text();
+            myfollow.userName = hrefElements.first().attr("href").substring(8);
+            myfollow.commentCount = itemElement.getElementsByClass("count_livid").text();
+            Elements avatarNode = itemElement.getElementsByTag("img");
+            if (avatarNode != null) {
+                String avatarString = avatarNode.attr("src");
+                if (avatarString.startsWith("//")) {
+                    myfollow.userIconUrl = "http:" + avatarString;
+                }
+            }
+            myfollowingList.add(myfollow);
+        }
+        return myfollowingList;
+
     }
 }

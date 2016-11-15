@@ -22,9 +22,9 @@ public class MainPageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (0 == position){
-            return new NewestTopicsFragment();
+            return NewestTopicsFragment.newInstance();
         }else {
-            return new NodeFragment();
+            return NodeFragment.newInstance();
         }
     }
 

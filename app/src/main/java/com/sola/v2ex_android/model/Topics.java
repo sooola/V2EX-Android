@@ -11,6 +11,7 @@ public class Topics implements Serializable {
 
     public int id;
     public String title;
+    public String nodeTitle;
     public String url;
     public String content;
     public String content_rendered;
@@ -21,6 +22,24 @@ public class Topics implements Serializable {
     public int last_modified;
     public int last_touched;
     public List<String> imgList;
+
+    @Override
+    public String toString() {
+        return "Topics{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", content='" + content + '\'' +
+                ", content_rendered='" + content_rendered + '\'' +
+                ", replies=" + replies +
+                ", member=" + member +
+                ", node=" + node +
+                ", created=" + created +
+                ", last_modified=" + last_modified +
+                ", last_touched=" + last_touched +
+                ", imgList=" + imgList +
+                '}';
+    }
 
     public static class MemberEntity implements Serializable {
         public int id;

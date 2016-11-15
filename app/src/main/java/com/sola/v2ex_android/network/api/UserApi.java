@@ -28,4 +28,7 @@ public interface UserApi {
     @Headers("Referer: https://www.v2ex.com/signin")
     @POST("signin")
     Observable<String> postLogin(@FieldMap HashMap<String, String> hashMap);
+
+    @GET("my/following")      //我关注的人
+    Observable<String> myFollowing();
 }

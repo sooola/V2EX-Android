@@ -2,13 +2,13 @@ package com.sola.v2ex_android.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.V2exUser;
 import com.sola.v2ex_android.network.LoginService;
-import com.sola.v2ex_android.ui.adapter.MyNodeAdapter;
+import com.sola.v2ex_android.ui.adapter.MyFollowingAdapter;
 import com.sola.v2ex_android.ui.base.BaseSwipeRefreshActivity;
 import com.sola.v2ex_android.util.JsoupUtil;
 
@@ -19,28 +19,28 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by wei on 2016/11/14.
- * 我收藏的节点
+ * Created by wei on 2016/11/15.
+ * 我关注的人
  */
 
-public class MyNodeActivity extends BaseSwipeRefreshActivity {
+public class MyFollowingActivity extends BaseSwipeRefreshActivity {
 
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecycleview;
+    @Bind(R.id.recycleview)
+    RecyclerView mRecyclerView;
 
-    MyNodeAdapter mAdapter;
+    MyFollowingAdapter mAdapter;
     
     public static Intent getIntent(Context context){
         Intent intent;
         if (null == V2exUser.getCurrentUser()){
             intent = LoginActivity.getIntent(context);
         }else {
-            intent = new Intent(context,MyNodeActivity.class);
+            intent = new Intent(context,MyFollowingActivity.class);
         }
         return intent;
     }
 
-    Observer<String> mObservable = new Observer<String>() {
+    Observer<String> mObserver = new Observer<String>() {
         @Override
         public void onCompleted() {
 
@@ -53,13 +53,13 @@ public class MyNodeActivity extends BaseSwipeRefreshActivity {
 
         @Override
         public void onNext(String stringResponse) {
-            mAdapter.appendItems(JsoupUtil.parseMyNodeInfo(stringResponse));
+            mAdapter.appendItems(JsoupUtil.parseMyfollowing(stringResponse));
         }
     };
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_my_node;
+        return R.layout.activity_my_following;
     }
 
     @Override
@@ -69,18 +69,22 @@ public class MyNodeActivity extends BaseSwipeRefreshActivity {
 
     @Override
     public void loadData() {
-        Subscription subscription =  LoginService.getInstance().auth().myCollectNode()
+        Subscription subscription =  LoginService.getInstance().auth().myFollowing()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mObservable);
+                .subscribe(mObserver);
         addSubscription(subscription);
     }
 
-
     private void setupRecyclerView() {
-        mAdapter = new MyNodeAdapter(this);
-        GridLayoutManager layoutManager = new GridLayoutManager(this , 3);
-        mRecycleview.setLayoutManager(layoutManager);
-        mRecycleview.setAdapter(mAdapter);
+        mAdapter = new MyFollowingAdapter(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 }

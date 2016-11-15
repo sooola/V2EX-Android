@@ -33,6 +33,10 @@ public class NewestTopicsFragment extends BaseSwipeRefreshFragment {
 
     private TopicsAdapter mAdapter;
 
+    public static NewestTopicsFragment newInstance() {
+        return new NewestTopicsFragment();
+    }
+
     Observer<TopicsData> observer = new Observer<TopicsData>() {
         @Override
         public void onCompleted() {
@@ -65,6 +69,7 @@ public class NewestTopicsFragment extends BaseSwipeRefreshFragment {
         setupRecyclerView();
         loadData();
     }
+
 
     public void loadData() {
         Subscription subscription = Observable.zip(V2exService.getInstance().getV2exApi().getTopicHot(), V2exService.getInstance().getV2exApi().getTopicLatest(), new Func2<List<Topics>, List<Topics>, TopicsData>() {

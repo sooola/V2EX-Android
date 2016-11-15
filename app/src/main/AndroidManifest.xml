@@ -46,6 +46,10 @@
             android:name=".ui.MyNodeActivity"
             android:label="@string/title_activity_mynode">
         </activity>
+        <activity
+            android:name=".ui.MyFollowingActivity"
+            android:label="@string/title_activity_myfollowing">
+        </activity>
     </application>
 
 </manifest>

@@ -29,6 +29,7 @@ public class MainActivity extends BaseActivity
 
     private ImageView mUserIcon;
     private TextView mUserName;
+    private View mLogoutBtn;
 
     @Override
     protected int getLayoutId() {
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.commit();
 
         View headView =  navigationView.getHeaderView(0);
+        mLogoutBtn = headView.findViewById(R.id.bt_logout);
         mUserIcon = (ImageView) headView.findViewById(R.id.iv_user_icon);
         mUserName = (TextView) headView.findViewById(R.id.tv_username);
 
@@ -56,19 +58,20 @@ public class MainActivity extends BaseActivity
             V2exUser currentUser = V2exUser.getCurrentUser();
             GlideUtil.glideWithCircleImg(MainActivity.this , currentUser.userAvatar , mUserIcon);
             mUserName.setText(currentUser.userId);
+            mLogoutBtn.setVisibility(View.VISIBLE);
         }
         mUserIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (V2exUser.getCurrentUser() == null){
                     v.getContext().startActivity(LoginActivity.getIntent(v.getContext()));
-                }else {
-                    ToastUtil.showShort("已登录");
                 }
             }
         });
 
-        headView.findViewById(R.id.bt_logout).setOnClickListener(new View.OnClickListener() {
+
+
+        mLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ToastUtil.showShort("退出登录成功");
@@ -100,9 +103,11 @@ public class MainActivity extends BaseActivity
                             UserLoginEvent userLoginEvent = (UserLoginEvent)event;
                             GlideUtil.glideWithCircleImg(MainActivity.this , userLoginEvent.userAvatar , mUserIcon);
                             mUserName.setText(userLoginEvent.userName);
+                            mLogoutBtn.setVisibility(View.VISIBLE);
                         }else if (event instanceof  UserLogoutEvent){
-                            mUserIcon.setImageResource(android.R.drawable.sym_def_app_icon);
+                            mUserIcon.setImageResource(R.drawable.ic_account_circle_black_48dp);
                             mUserName.setText("请登录");
+                            mLogoutBtn.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -139,12 +144,10 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_node_collecct) {
             startActivity(MyNodeActivity.getIntent(this));
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_my_following) {
+            startActivity(MyFollowingActivity.getIntent(this));
+        } else if (id == R.id.nav_about) {
+            ToastUtil.showShort("Github:https://github.com/sooola/V2EX-Android");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

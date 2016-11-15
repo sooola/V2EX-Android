@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll"
             app:popupTheme="@style/Widget.Design.AppBarLayout"/>
 
     </android.support.design.widget.AppBarLayout>

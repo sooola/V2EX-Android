@@ -39,6 +39,11 @@ public class NodeFragment extends BaseFragment {
     private String[] mTransactionGroupTitle = new String[] { "二手交易", "物物交换", "免费赠送" , "域名"};
     private boolean mIsFirst = true;
 
+
+    public static NodeFragment newInstance() {
+        return new NodeFragment();
+    }
+
     @Bind(R.id.ll_root)
     LinearLayout mContentLl;
 
