@@ -1,6 +1,6 @@
 # V2EX-Android
 
-[![fir.im下载地址]](http://fir.im/sooooola)  
+[fir.im下载地址](http://fir.im/sooooola)  
 
 
 V2EX的Android客户端， RxJava & Retrofit & Glide ，数据来源 https://www.v2ex.com/
