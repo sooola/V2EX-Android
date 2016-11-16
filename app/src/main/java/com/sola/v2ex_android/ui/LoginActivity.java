@@ -110,7 +110,7 @@ public class LoginActivity extends BaseSwipeRefreshActivity {
     }
 
     private void login(final String username, final String password) {
-        Subscription subscription = LoginService.getInstance().auth().loginWithUsername()
+        Subscription subscription = LoginService.getInstance().auth().login()
                 .map(new Func1<String, HashMap>() {
                     @Override
                     public HashMap call(String stringResponse) {

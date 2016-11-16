@@ -22,7 +22,7 @@ public interface UserApi {
     Observable<String> myCollectNode();
 
     @GET("signin")      //登录
-    Observable<String> loginWithUsername();
+    Observable<String> login();
 
     @FormUrlEncoded
     @Headers("Referer: https://www.v2ex.com/signin")

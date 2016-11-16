@@ -11,6 +11,7 @@ import com.sola.v2ex_android.network.LoginService;
 import com.sola.v2ex_android.ui.adapter.MyFollowingAdapter;
 import com.sola.v2ex_android.ui.base.BaseSwipeRefreshActivity;
 import com.sola.v2ex_android.util.JsoupUtil;
+import com.sola.v2ex_android.util.ToastUtil;
 
 import butterknife.Bind;
 import rx.Observer;
@@ -48,11 +49,13 @@ public class MyFollowingActivity extends BaseSwipeRefreshActivity {
 
         @Override
         public void onError(Throwable e) {
-
+            setSwipeRefreshLayoutRefresh(false);
+            ToastUtil.showShort(getString(R.string.tip_network_error));
         }
 
         @Override
         public void onNext(String stringResponse) {
+            setSwipeRefreshLayoutRefresh(false);
             mAdapter.appendItems(JsoupUtil.parseMyfollowing(stringResponse));
         }
     };
@@ -85,6 +88,7 @@ public class MyFollowingActivity extends BaseSwipeRefreshActivity {
 
     @Override
     public void onRefresh() {
-
+        mAdapter.cleanData();
+        loadData();
     }
 }
