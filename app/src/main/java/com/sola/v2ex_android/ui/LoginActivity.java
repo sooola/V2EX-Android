@@ -100,7 +100,7 @@ public class LoginActivity extends BaseSwipeRefreshActivity {
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
 
     }
 

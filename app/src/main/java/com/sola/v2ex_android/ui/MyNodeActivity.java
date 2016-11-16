@@ -48,11 +48,12 @@ public class MyNodeActivity extends BaseSwipeRefreshActivity {
 
         @Override
         public void onError(Throwable e) {
-
+            setSwipeRefreshLayoutRefresh(false);
         }
 
         @Override
         public void onNext(String stringResponse) {
+            setSwipeRefreshLayoutRefresh(false);
             mAdapter.appendItems(JsoupUtil.parseMyNodeInfo(stringResponse));
         }
     };
@@ -62,10 +63,14 @@ public class MyNodeActivity extends BaseSwipeRefreshActivity {
         return R.layout.activity_my_node;
     }
 
+
     @Override
-    protected void initViews() {
+    public void initViews(){
+        super.initViews();
+        setSwipeRefreshLayoutRefresh(true);
         setupRecyclerView();
     }
+
 
     @Override
     public void loadData() {

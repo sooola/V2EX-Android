@@ -8,6 +8,11 @@
 
     <include layout="@layout/toolbar_layout"/>
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:paddingTop="4dp"
@@ -17,5 +22,7 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

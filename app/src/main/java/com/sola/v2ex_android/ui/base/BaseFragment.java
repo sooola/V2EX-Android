@@ -29,8 +29,11 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        initViews();
+        initViews(view);
+        loadData();
     }
+
+
 
     public CompositeSubscription getCompositeSubscription() {
         if (this.mCompositeSubscription == null) {
@@ -60,6 +63,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayoutId();
 
-    protected abstract void initViews();
+    protected abstract void initViews(View view);
+
+    protected abstract void loadData();
+
 
 }

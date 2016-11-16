@@ -66,7 +66,9 @@ public class MyFollowingActivity extends BaseSwipeRefreshActivity {
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
+        super.initViews();
+        setSwipeRefreshLayoutRefresh(true);
         setupRecyclerView();
     }
 

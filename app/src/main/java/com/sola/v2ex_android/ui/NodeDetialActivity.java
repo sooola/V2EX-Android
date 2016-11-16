@@ -90,7 +90,8 @@ public class NodeDetialActivity extends BaseSwipeRefreshActivity {
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
+        setSwipeRefreshLayoutRefresh(true);
         mNodeName = getIntent().getStringExtra(KEY_NODENAME);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override

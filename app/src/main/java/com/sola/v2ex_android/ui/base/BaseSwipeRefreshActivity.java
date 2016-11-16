@@ -28,18 +28,22 @@ public abstract class BaseSwipeRefreshActivity extends BaseActivity implements S
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+
+    @Override
+    public void initViews(){
         mHandle = new MyHandler(this);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (null != mSwipeRefreshLayout){
             mSwipeRefreshLayout.setOnRefreshListener(this);
             mSwipeRefreshLayout.setColorSchemeResources(
                     android.R.color.holo_green_light, android.R.color.holo_blue_bright,
                     android.R.color.holo_orange_light, android.R.color.holo_red_light);
         }
-
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void setSwipeRefreshEnabled(boolean isEnable){
@@ -63,6 +67,7 @@ public abstract class BaseSwipeRefreshActivity extends BaseActivity implements S
             }
         }
     }
+
 
     private static class MyHandler extends Handler {
 

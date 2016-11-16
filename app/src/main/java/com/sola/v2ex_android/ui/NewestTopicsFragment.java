@@ -2,6 +2,7 @@ package com.sola.v2ex_android.ui;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.Topics;
@@ -63,14 +64,15 @@ public class NewestTopicsFragment extends BaseSwipeRefreshFragment {
         return R.layout.fragment_newset_topics;
     }
 
+
     @Override
-    protected void initViews() {
+    public void initViews(View view) {
+        super.initViews(view);
         setSwipeRefreshLayoutRefresh(true);
         setupRecyclerView();
-        loadData();
     }
 
-
+    @Override
     public void loadData() {
         Subscription subscription = Observable.zip(V2exService.getInstance().getV2exApi().getTopicHot(), V2exService.getInstance().getV2exApi().getTopicLatest(), new Func2<List<Topics>, List<Topics>, TopicsData>() {
             @Override

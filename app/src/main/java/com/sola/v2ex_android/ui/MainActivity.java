@@ -91,8 +91,6 @@ public class MainActivity extends BaseActivity
         rxBusObservers();
     }
 
-
-
     private void rxBusObservers() {
         Subscription subscription = RxBus.getInstance()
                 .toObserverable()
@@ -147,7 +145,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_my_following) {
             startActivity(MyFollowingActivity.getIntent(this));
         } else if (id == R.id.nav_about) {
-            ToastUtil.showShort("Github:https://github.com/sooola/V2EX-Android");
+            ToastUtil.showShort(getString(R.string.github_address));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

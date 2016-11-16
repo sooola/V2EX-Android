@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.NodeInfo;
 import com.sola.v2ex_android.network.V2exService;
-import com.sola.v2ex_android.ui.base.BaseFragment;
+import com.sola.v2ex_android.ui.base.BaseSwipeRefreshFragment;
 import com.sola.v2ex_android.util.LogUtil;
 import com.sola.v2ex_android.util.NodeDataUtil;
 import com.sola.v2ex_android.util.ToastUtil;
@@ -30,7 +30,7 @@ import rx.schedulers.Schedulers;
  * Created by wei on 2016/10/27.
  */
 
-public class NodeFragment extends BaseFragment {
+public class NodeFragment extends BaseSwipeRefreshFragment {
 
     private String[] mTechnologyGroupTitle = new String[] { "程序员", "Python", "iDev", "Android","Linux" ,"node.js"};
     private String[] mCreativeGroupTitle = new String[] { "分享创造", "设计", "奇思妙想"};
@@ -77,8 +77,8 @@ public class NodeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initViews() {
-        loadData();
+    public void initViews(View view) {
+        super.initViews(view);
     }
 
     private void initData(Map<String, List<NodeInfo>> nodeSortMap) {
@@ -165,7 +165,8 @@ public class NodeFragment extends BaseFragment {
         }
     }
 
-    private void loadData() {
+    @Override
+    public void loadData() {
         Subscription subscription = V2exService.getInstance().getV2exApi().getAllNode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -173,4 +174,9 @@ public class NodeFragment extends BaseFragment {
         addSubscription(subscription);
     }
 
+    @Override
+    public void onRefresh() {
+        mContentLl.removeAllViews();
+        loadData();
+    }
 }

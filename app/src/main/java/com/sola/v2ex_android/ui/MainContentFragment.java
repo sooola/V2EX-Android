@@ -3,6 +3,7 @@ package com.sola.v2ex_android.ui;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.ui.adapter.MainPageAdapter;
@@ -26,11 +27,14 @@ public class MainContentFragment extends BaseFragment {
     }
 
     @Override
-    protected void initViews() {
+    protected void initViews(View view) {
         MainPageAdapter adapter = new MainPageAdapter(getFragmentManager());
         mVpMain.setAdapter(adapter);
         mTabs.setupWithViewPager(mVpMain);
     }
 
+    @Override
+    protected void loadData() {
 
+    }
 }

@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.sola.v2ex_android.R;
+import com.sola.v2ex_android.util.LogUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -18,10 +19,15 @@ public abstract class BaseSwipeRefreshFragment extends BaseFragment implements S
 
     SwipeRefreshLayout mSwipeRefreshLayout;
     public Handler mHandle;
+    private View mRootView;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void initViews(View view){
         mHandle = new MyHandler(getActivity());
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshlayout);
         if (null != mSwipeRefreshLayout) {
@@ -30,6 +36,7 @@ public abstract class BaseSwipeRefreshFragment extends BaseFragment implements S
                     android.R.color.holo_green_light, android.R.color.holo_blue_bright,
                     android.R.color.holo_orange_light, android.R.color.holo_red_light);
         }
+
     }
 
     public void setSwipeRefreshEnabled(boolean isEnable){
@@ -38,16 +45,17 @@ public abstract class BaseSwipeRefreshFragment extends BaseFragment implements S
     }
 
     public void setSwipeRefreshLayoutRefresh(boolean refresh){
+        LogUtil.d("BaseSwipeRefreshFragment","setSwipeRefreshLayoutRefresh");
+        LogUtil.d("BaseSwipeRefreshFragment","mSwipeRefreshLayout" + mSwipeRefreshLayout);
         if (null != mSwipeRefreshLayout){
             if (refresh){
-                if (!mSwipeRefreshLayout.isRefreshing()){
+                LogUtil.d("BaseSwipeRefreshFragment","in refresh");
                     mHandle.post(new Runnable() {
                         @Override
                         public void run() {
                             mSwipeRefreshLayout.setRefreshing(true);
                         }
                     });
-                }
             }else {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -62,5 +70,6 @@ public abstract class BaseSwipeRefreshFragment extends BaseFragment implements S
             mReference = new WeakReference<>(fragment);
         }
     }
+
 
 }

@@ -90,7 +90,8 @@ public class UserDetialActivity extends BaseSwipeRefreshActivity {
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
+        super.initViews();
         mUserName = getIntent().getStringExtra(KEY_USERNAME);
 
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
