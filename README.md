@@ -5,7 +5,7 @@
 
 V2EX的Android客户端， RxJava & Retrofit & Glide   
 数据来源 https://www.v2ex.com/
-因官方API说明有些缺少的部分，也写了份API 说明 https://github.com/sooola/V2EX-API
+因官方API说明有些缺少的部分，也写了份API 说明 https://github.com/sooola/V2EX-API ，方便大家查阅
 
 相关文章 http://www.jianshu.com/p/24c0b44f3d0b
 
