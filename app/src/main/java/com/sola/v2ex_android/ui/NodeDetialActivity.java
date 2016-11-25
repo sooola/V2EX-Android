@@ -33,6 +33,7 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
+ * 节点详情
  * Created by wei on 2016/10/27.
  */
 
@@ -89,8 +90,11 @@ public class NodeDetialActivity extends BaseSwipeRefreshActivity {
         return R.layout.activity_node_detial;
     }
 
+
+
     @Override
     public void initViews() {
+        super.initViews();
         setSwipeRefreshLayoutRefresh(true);
         mNodeName = getIntent().getStringExtra(KEY_NODENAME);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {

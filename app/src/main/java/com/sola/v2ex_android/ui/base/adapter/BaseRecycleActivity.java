@@ -56,7 +56,6 @@ public abstract class BaseRecycleActivity <T> extends BaseActivity implements Sw
                 android.R.color.holo_green_light, android.R.color.holo_blue_bright,
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
         setSwipeRefreshLayoutRefresh(true);
-        requestData();
     }
 
     public void initToolBar(Toolbar toolbar) {
@@ -101,7 +100,7 @@ public abstract class BaseRecycleActivity <T> extends BaseActivity implements Sw
 
                             @Override
                             public void onLoadMoreRequested() {
-                                sendRequestData();
+                                loadData();
                             }
                         }
                 );
@@ -159,7 +158,7 @@ public abstract class BaseRecycleActivity <T> extends BaseActivity implements Sw
 
     protected void requestData() {
         // 取新的数据
-        sendRequestData();
+        loadData();
     }
 
     private static class MyHandler extends Handler {
@@ -176,7 +175,6 @@ public abstract class BaseRecycleActivity <T> extends BaseActivity implements Sw
     /**
      * 给子类实现，请求数据
      */
-    protected abstract void sendRequestData();
 
     protected abstract void onViewCreate();
 

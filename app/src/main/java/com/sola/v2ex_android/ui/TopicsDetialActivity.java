@@ -56,6 +56,7 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
 
     @Override
     public void onRefresh() {
+        mAdapter.cleanData();
         refreshing();
     }
 
@@ -74,14 +75,11 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
         public void onNext(NodeInfo items) {
             mNodeNameStr = items.name;
             mJoinCount.setText(String.format(TopicsDetialActivity.this.getResources().getString(R.string.node_start) ,items.stars));
+            LogUtil.d("TopicsDetialActivity","items.replies" + items.replies.size());
+             LogUtil.d("TopicsDetialActivity","items.replies" + items.replies.toString());
             loadDataSuccess(items.replies);
         }
     };
-
-    @Override
-    protected void sendRequestData() {
-        loadData();
-    }
 
     @Override
     public void loadData() {
@@ -102,7 +100,7 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
     protected void onViewCreate() {
         mTopics = (Topics) getIntent().getSerializableExtra(KEY_TOPIC);
         mNodeName.setText(mTopics.node.title);
-        
+
     }
 
     @Override

@@ -104,11 +104,6 @@ public class LoginActivity extends BaseSwipeRefreshActivity {
 
     }
 
-    @Override
-    public void loadData() {
-
-    }
-
     private void login(final String username, final String password) {
         Subscription subscription = LoginService.getInstance().auth().login()
                 .map(new Func1<String, HashMap>() {
