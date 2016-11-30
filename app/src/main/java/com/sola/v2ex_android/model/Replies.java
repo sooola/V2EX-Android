@@ -10,6 +10,7 @@ public class Replies {
     public int thanks;
     public String content;
     public String content_rendered;
+    public String time;
     public MemberEntity member;
     public long created;
     public int last_modified;
@@ -34,5 +35,17 @@ public class Replies {
         public String avatar_mini;
         public String avatar_normal;
         public String avatar_large;
+
+        @Override
+        public String toString() {
+            return "MemberEntity{" +
+                    "id=" + id +
+                    ", username='" + username + '\'' +
+                    ", tagline='" + tagline + '\'' +
+                    ", avatar_mini='" + avatar_mini + '\'' +
+                    ", avatar_normal='" + avatar_normal + '\'' +
+                    ", avatar_large='" + avatar_large + '\'' +
+                    '}';
+        }
     }
 }

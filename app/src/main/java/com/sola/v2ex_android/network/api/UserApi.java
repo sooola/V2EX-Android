@@ -7,6 +7,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -31,4 +32,8 @@ public interface UserApi {
 
     @GET("my/following")      //我关注的人
     Observable<String> myFollowing();
+
+    @GET("t/{topicId}")
+    Observable<String> myFollowingTopicDetial(@Path("topicId") String topicId);    //我关注的人帖子
+
 }

@@ -11,5 +11,6 @@ public class MyFollowing {
     public String userIconUrl;
     public String nodeName;
     public String commentCount;
+    public String topicId;
 
 }

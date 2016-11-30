@@ -2,7 +2,9 @@ package com.sola.v2ex_android.util;
 
 import com.sola.v2ex_android.model.LoginResult;
 import com.sola.v2ex_android.model.MyFollowing;
+import com.sola.v2ex_android.model.MyFollowingTopicDetial;
 import com.sola.v2ex_android.model.MyNode;
+import com.sola.v2ex_android.model.Replies;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -96,6 +98,8 @@ public class JsoupUtil {
             Elements titleElements = itemElement.getElementsByClass("item_title");
             Elements nodeElements = itemElement.getElementsByClass("node");
             Elements hrefElements = itemElement.getElementsByAttribute("href");
+            String href = titleElements.select("a").attr("href");
+            myfollow.topicId = href.substring(3 , href.indexOf("#"));
             myfollow.title = titleElements.text();
             myfollow.nodeName =  nodeElements.text();
             myfollow.userName = hrefElements.first().attr("href").substring(8);
@@ -111,5 +115,51 @@ public class JsoupUtil {
         }
         return myfollowingList;
 
+    }
+
+    public static MyFollowingTopicDetial parseMyfollowingTopicDetial(String response){
+        MyFollowingTopicDetial topicDetial = new MyFollowingTopicDetial();
+        Document doc = Jsoup.parse(response);
+        Element body = doc.body();
+        Element mainElement = body.getElementById("Main");
+        Elements itemElements =  mainElement.getElementsByClass("cell");
+        Elements headerElements =  mainElement.getElementsByClass("header");
+        Elements commentElements =  mainElement.getElementsByClass("box");
+        for (Element headerElement : headerElements) {
+            //头部用户信息
+            Elements avatarNode = headerElement.getElementsByTag("img");
+            Elements aNode = headerElement.getElementsByTag("a");
+            if (avatarNode != null) {
+                String avatarString = avatarNode.attr("src");
+                if (avatarString.startsWith("//")) {
+                    topicDetial.avatar = "http:" + avatarString;
+                    topicDetial.userName =  aNode.first().attr("href").substring(8);
+                }
+            }
+             LogUtil.d("JsoupUtil","headerElements.select(\".gray\")" + headerElements.select(".gray").text());
+            topicDetial.title = headerElement.getElementsByTag("h1").text();
+        }
+        topicDetial.content = mainElement.select(".markdown_body").html();
+
+        List<Replies> reploeList = new ArrayList<>();
+        for (Element cell : commentElements.get(1).getElementsByClass("cell")) {
+            Elements avatarNode = cell.select(".avatar");
+            if (ValidateUtil.isNotEmpty(avatarNode)) {
+                Replies replie = new Replies();
+                Replies.MemberEntity member = new Replies.MemberEntity();
+                String avatarString = avatarNode.attr("src");
+                if (avatarString.startsWith("//")) {
+                    member.avatar_normal = "http:" + avatarString;
+                }
+                member.username = cell.select(".dark").text();
+                replie.time = cell.select(".fade small").text();
+                replie.content = cell.select(".reply_content").html();
+                replie.member = member;
+                reploeList.add(replie);
+            }
+        }
+        topicDetial.replies = reploeList;
+
+        return topicDetial;
     }
 }

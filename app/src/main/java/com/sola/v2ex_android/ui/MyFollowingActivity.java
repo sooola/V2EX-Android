@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.sola.v2ex_android.R;
+import com.sola.v2ex_android.model.MyFollowing;
 import com.sola.v2ex_android.model.V2exUser;
 import com.sola.v2ex_android.network.LoginService;
 import com.sola.v2ex_android.ui.adapter.MyFollowingAdapter;
@@ -13,10 +14,13 @@ import com.sola.v2ex_android.ui.base.BaseSwipeRefreshActivity;
 import com.sola.v2ex_android.util.JsoupUtil;
 import com.sola.v2ex_android.util.ToastUtil;
 
+import java.util.List;
+
 import butterknife.Bind;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -30,18 +34,18 @@ public class MyFollowingActivity extends BaseSwipeRefreshActivity {
     RecyclerView mRecyclerView;
 
     MyFollowingAdapter mAdapter;
-    
-    public static Intent getIntent(Context context){
+
+    public static Intent getIntent(Context context) {
         Intent intent;
-        if (null == V2exUser.getCurrentUser()){
+        if (null == V2exUser.getCurrentUser()) {
             intent = LoginActivity.getIntent(context);
-        }else {
-            intent = new Intent(context,MyFollowingActivity.class);
+        } else {
+            intent = new Intent(context, MyFollowingActivity.class);
         }
         return intent;
     }
 
-    Observer<String> mObserver = new Observer<String>() {
+    Observer<List<MyFollowing>> mObserver = new Observer<List<MyFollowing>>() {
         @Override
         public void onCompleted() {
 
@@ -54,9 +58,9 @@ public class MyFollowingActivity extends BaseSwipeRefreshActivity {
         }
 
         @Override
-        public void onNext(String stringResponse) {
+        public void onNext(List<MyFollowing> myfollowList) {
             setSwipeRefreshLayoutRefresh(false);
-            mAdapter.appendItems(JsoupUtil.parseMyfollowing(stringResponse));
+            mAdapter.appendItems(myfollowList);
         }
     };
 
@@ -74,10 +78,15 @@ public class MyFollowingActivity extends BaseSwipeRefreshActivity {
 
     @Override
     public void loadData() {
-        Subscription subscription =  LoginService.getInstance().auth().myFollowing()
-                .subscribeOn(Schedulers.io())
+        Subscription subscription = LoginService.getInstance().auth().myFollowing().map(new Func1<String, List<MyFollowing>>() {
+            @Override
+            public List<MyFollowing> call(String s) {
+                return JsoupUtil.parseMyfollowing(s);
+            }
+        }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mObserver);
+
         addSubscription(subscription);
     }
 
