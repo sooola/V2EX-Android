@@ -18,19 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/Widget.Design.AppBarLayout"/>
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main"/>
 
-   <!-- <android.support.design.widget.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"/> -->
+        app:layout_behavior="com.sola.v2ex_android.util.MyBehavior"
+        app:srcCompat="@android:drawable/ic_dialog_email"/>
 
 </android.support.design.widget.CoordinatorLayout>

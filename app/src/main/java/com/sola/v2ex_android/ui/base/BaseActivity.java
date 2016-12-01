@@ -3,7 +3,10 @@ package com.sola.v2ex_android.ui.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.sola.v2ex_android.R;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -17,12 +20,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     private CompositeSubscription mCompositeSubscription;
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initViews();
         loadData();
     }

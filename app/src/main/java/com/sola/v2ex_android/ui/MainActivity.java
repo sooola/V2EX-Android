@@ -21,6 +21,7 @@ import com.sola.v2ex_android.util.GlideUtil;
 import com.sola.v2ex_android.util.RxBus;
 import com.sola.v2ex_android.util.ToastUtil;
 
+import butterknife.OnClick;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -30,6 +31,9 @@ public class MainActivity extends BaseActivity
     private ImageView mUserIcon;
     private TextView mUserName;
     private View mLogoutBtn;
+    @OnClick(R.id.fab) void submit(View view) {
+        view.getContext().startActivity(SendTopicActivity.getIntent(view.getContext()));
+    }
 
     @Override
     protected int getLayoutId() {

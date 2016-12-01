@@ -55,6 +55,11 @@
             android:name=".ui.MyFollowingTopicDetialActivity"
             android:label="@string/title_activity_myfollowing">
         </activity>
+
+        <activity
+            android:name=".ui.SendTopicActivity"
+            android:label="@string/send_topic">
+        </activity>
     </application>
 
 </manifest>

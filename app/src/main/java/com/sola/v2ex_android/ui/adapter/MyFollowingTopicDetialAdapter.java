@@ -69,13 +69,13 @@ public class MyFollowingTopicDetialAdapter  extends BaseRecyclerAdapter<Replies>
             GlideUtil.glideWithImg(mContext , mTopics.avatar ,holder.getImageView(R.id.iv_user_icon));
             holder.setText(R.id.tv_username , mTopics.userName);
             holder.setText(R.id.tv_title , mTopics.title);
-//            holder.setText(R.id.tv_publish_time , TimeUtil.friendlyFormat(mTopics.created * 1000));
+            holder.setText(R.id.tv_publish_time , mTopics.publishTime);
             RichText.from(ContentUtils.formatContent(mTopics.content)).into(holder.getTextView(R.id.tv_content));
-//            holder.setText(R.id.tv_replies_count , String.format(mContext.getResources().getString(R.string.replies_count) ,mTopics.replies));
+            holder.setText(R.id.tv_replies_count , String.format(mContext.getResources().getString(R.string.replies_count) ,mTopics.replies_count));
             holder.setOnClickListener(R.id.iv_user_icon, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    v.getContext().startActivity(UserDetialActivity.getIntent(v.getContext() ,member.username ));
+                    v.getContext().startActivity(UserDetialActivity.getIntent(v.getContext() ,mTopics.userName ));
                 }
             });
         }else {
@@ -83,7 +83,7 @@ public class MyFollowingTopicDetialAdapter  extends BaseRecyclerAdapter<Replies>
             GlideUtil.glideWithImg(mContext ,repliMember.avatar_normal ,holder.getImageView(R.id.iv_user_icon));
             holder.setText(R.id.tv_username , repliMember.username);
             RichText.from(ContentUtils.formatContent(item.content)).into(holder.getTextView(R.id.tv_comment_content));
-//            holder.setText(R.id.tv_time , TimeUtil.friendlyFormat(item.created * 1000));
+            holder.setText(R.id.tv_time , item.publishTime);
             holder.setOnClickListener(R.id.iv_user_icon, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

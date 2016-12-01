@@ -136,7 +136,8 @@ public class JsoupUtil {
                     topicDetial.userName =  aNode.first().attr("href").substring(8);
                 }
             }
-             LogUtil.d("JsoupUtil","headerElements.select(\".gray\")" + headerElements.select(".gray").text());
+            String[] s1 = headerElements.select(".gray").text().split(" · ");
+            topicDetial.publishTime = s1[1];
             topicDetial.title = headerElement.getElementsByTag("h1").text();
         }
         topicDetial.content = mainElement.select(".markdown_body").html();
@@ -152,13 +153,14 @@ public class JsoupUtil {
                     member.avatar_normal = "http:" + avatarString;
                 }
                 member.username = cell.select(".dark").text();
-                replie.time = cell.select(".fade small").text();
+                replie.publishTime = cell.getElementsByClass("fade small").text();
                 replie.content = cell.select(".reply_content").html();
                 replie.member = member;
                 reploeList.add(replie);
             }
         }
         topicDetial.replies = reploeList;
+        topicDetial.replies_count = reploeList.size();
 
         return topicDetial;
     }

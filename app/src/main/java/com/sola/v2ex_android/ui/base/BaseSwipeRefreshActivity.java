@@ -1,10 +1,7 @@
 package com.sola.v2ex_android.ui.base;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.Toolbar;
 
 import com.sola.v2ex_android.R;
 
@@ -18,21 +15,12 @@ public abstract class BaseSwipeRefreshActivity extends BaseActivity implements S
 
     SwipeRefreshLayout mSwipeRefreshLayout;
     public Handler mHandle;
-    Toolbar mToolbar;
+
 
     @Override
     public void onRefresh() {
 
     }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
 
     @Override
     public void initViews(){

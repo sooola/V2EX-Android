@@ -13,6 +13,7 @@ public class MyFollowingTopicDetial {
     public String title;
     public String content;
     public String publishTime;
+    public int replies_count;
 
     public List<Replies> replies;
 }

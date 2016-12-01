@@ -10,7 +10,7 @@ public class Replies {
     public int thanks;
     public String content;
     public String content_rendered;
-    public String time;
+    public String publishTime;
     public MemberEntity member;
     public long created;
     public int last_modified;

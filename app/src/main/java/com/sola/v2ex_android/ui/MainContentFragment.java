@@ -1,6 +1,5 @@
 package com.sola.v2ex_android.ui;
 
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -17,9 +16,6 @@ public class MainContentFragment extends BaseFragment {
     ViewPager mVpMain;
     @Bind(R.id.tabs)
     TabLayout mTabs;
-    @Bind(R.id.appbarlayout)
-    AppBarLayout mAppbarlayout;
-
 
     @Override
     protected int getLayoutId() {

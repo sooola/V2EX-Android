@@ -113,4 +113,5 @@
     <string name="title_activity_mynode">节点收藏</string>
     <string name="title_activity_myfollowing">我关注的人</string>
     <string name="github_address">Github:https://github.com/sooola/V2EX-Android</string>
+    <string name="send_topic">发表主题</string>
 </resources>

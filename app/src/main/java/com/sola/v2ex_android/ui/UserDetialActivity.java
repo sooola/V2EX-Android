@@ -97,7 +97,6 @@ public class UserDetialActivity extends BaseSwipeRefreshActivity {
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                LogUtil.d("UserDetialActivity", "verticalOffset" + verticalOffset);
                 if (-verticalOffset >= 245) {
                     mCollapsingToolbarLayout.setTitle(mUserName);
                 } else {
