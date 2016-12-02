@@ -1,11 +1,11 @@
 package com.sola.v2ex_android.ui.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +49,41 @@ public class PickerView extends RecyclerView {
         this.setLayoutManager(layoutManager);
         mAdapter = new PickerAdapter(this.getContext());
         this.setAdapter(mAdapter);
+        this.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+//                    mAdapter.highlightItem();
+                    //将位置移动到中间位置
+                    ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(getScrollPosition(),0);
+                     LogUtil.d("PickerView","getScrollPosition()" + getScrollPosition());
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                tvage.setText(String.valueOf(getMiddlePosition() + START_NUM));
+            }
+        });
+    }
+
+
+    /**
+     * 获取滑动值, 滑动偏移 / 每个格子宽度
+     *
+     * @return 当前值
+     */
+    private int getScrollPosition() {
+        return (int) (((double) this.computeVerticalScrollOffset()
+                / (double) mAdapter.getItemWidth())+0.5f);
     }
 
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         super.onMeasure(widthSpec, heightSpec);
-        mHight = getHeight();
+        mHight = getMeasuredHeight();
+        mAdapter.setViewHeight(mHight);
         LogUtil.d("PickerView","mHight" + mHight);
     }
 
@@ -68,6 +97,8 @@ public class PickerView extends RecyclerView {
 
        protected List<String> mData;
        public Context mContext;
+       private int mViewHeight;
+       private int mHighlight = 0; // 高亮
 
        public  PickerAdapter(Context context){
            mContext = context;
@@ -78,12 +109,16 @@ public class PickerView extends RecyclerView {
         */
        public int ITEM_NUM = 3;
 
+       public void setViewHeight(int hight){
+           mViewHeight = hight;
+       }
+
        @Override
        public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
            View view = LayoutInflater.from(mContext).inflate(R.layout.item_pick_view, parent, false);
            //设置宽度
            ViewGroup.LayoutParams params = view.getLayoutParams();
-           params.width =(int)getItemWidth();
+           params.height = (int)getItemWidth();
            LogUtil.d("PickerView","getItemWidth()" + getItemWidth());
            return new ItemViewHolder(view);
        }
@@ -91,6 +126,16 @@ public class PickerView extends RecyclerView {
        @Override
        public void onBindViewHolder(ItemViewHolder holder, int position) {
            holder.mTextView.setText(mData.get(position));
+           // 高亮显示
+           if (isSelected(position)) {
+               holder.getTextView().setTextSize(30);
+               holder.getTextView().setTextColor(Color.parseColor("#000000"));
+               holder.mTextView.setBackgroundResource(R.drawable.banch_background_top_bottom_border);
+           } else {
+               holder.getTextView().setTextSize(20);
+               holder.getTextView().setTextColor(Color.parseColor("#666666"));
+               holder.mTextView.setBackground(null);
+           }
        }
 
        @Override
@@ -99,8 +144,21 @@ public class PickerView extends RecyclerView {
        }
 
        public float getItemWidth() {
-           DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
-           return displayMetrics.widthPixels / ITEM_NUM;
+           return mViewHeight / ITEM_NUM;
+       }
+
+       // 判断是否是高亮
+       public boolean isSelected(int position) {
+           return mHighlight == position;
+       }
+
+       // 高亮中心, 更新前后位置
+       public void highlightItem(int position) {
+           mHighlight = position;
+//           int offset = ITEM_NUM / 2;
+//           for (int i = position - offset; i <= position + offset; ++i)
+//               notifyItemChanged(i);
+           notifyDataSetChanged();
        }
 
 
@@ -130,7 +188,7 @@ public class PickerView extends RecyclerView {
                mTextView.setTag(this);
            }
 
-           public TextView getmTextView() {
+           public TextView getTextView() {
                return mTextView;
            }
        }
