@@ -25,9 +25,9 @@ import java.util.List;
 public class PickerView extends RecyclerView {
 
 
-
     private PickerAdapter mAdapter;
     private int mHight;
+    private int mItemHight;
 
     public PickerView(Context context) {
         super(context);
@@ -53,19 +53,30 @@ public class PickerView extends RecyclerView {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
 //                    mAdapter.highlightItem();
                     //将位置移动到中间位置
-                    ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(getScrollPosition(),0);
-                     LogUtil.d("PickerView","getScrollPosition()" + getScrollPosition());
+                    LogUtil.d("PickerView", " getScollYDistance() " +  getScollYDistance() );
+                     LogUtil.d("PickerView","position" + getScollYDistance()/mItemHight);
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(getScrollPosition(), 0);
+                    LogUtil.d("PickerView", "getScrollPosition()" + getScrollPosition());
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
 //                tvage.setText(String.valueOf(getMiddlePosition() + START_NUM));
             }
         });
+    }
+
+    private int getScollYDistance() {
+        LinearLayoutManager layoutManager = (LinearLayoutManager) this.getLayoutManager();
+        int position = layoutManager.findFirstVisibleItemPosition();
+        View firstVisiableChildView = layoutManager.findViewByPosition(position);
+        int itemHeight = firstVisiableChildView.getHeight();
+        return (position) * itemHeight - firstVisiableChildView.getTop();
     }
 
 
@@ -83,6 +94,7 @@ public class PickerView extends RecyclerView {
     protected void onMeasure(int widthSpec, int heightSpec) {
         super.onMeasure(widthSpec, heightSpec);
         mHight = getMeasuredHeight();
+        mItemHight = mHight / 3;
         mAdapter.setViewHeight(mHight);
         LogUtil.d("PickerView","mHight" + mHight);
     }
@@ -125,9 +137,11 @@ public class PickerView extends RecyclerView {
 
        @Override
        public void onBindViewHolder(ItemViewHolder holder, int position) {
-           holder.mTextView.setText(mData.get(position));
+           int loopPosition = position % mData.size();
+           holder.mTextView.setText(mData.get(loopPosition));
            // 高亮显示
-           if (isSelected(position)) {
+            LogUtil.d("PickerAdapter","position " + loopPosition);
+           if (isSelected(loopPosition)) {
                holder.getTextView().setTextSize(30);
                holder.getTextView().setTextColor(Color.parseColor("#000000"));
                holder.mTextView.setBackgroundResource(R.drawable.banch_background_top_bottom_border);
@@ -140,7 +154,8 @@ public class PickerView extends RecyclerView {
 
        @Override
        public int getItemCount() {
-           return mData.size();
+//           return mData.size();
+           return Integer.MAX_VALUE;
        }
 
        public float getItemWidth() {

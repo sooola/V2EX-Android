@@ -20,9 +20,9 @@
         android:layout_height="wrap_content"
         android:hint="帖子正文"/>
 
-    <com.sola.v2ex_android.ui.widget.PickerView
+    <com.sola.v2ex_android.ui.widget.PickerScrollView
         android:id="@+id/pickview"
         android:layout_width="match_parent"
-        android:layout_height="60dp"/>
+        android:layout_height="380dp"/>
 
 </LinearLayout>

@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.widget.EditText;
 
 import com.sola.v2ex_android.R;
+import com.sola.v2ex_android.model.Pickers;
 import com.sola.v2ex_android.ui.base.BaseActivity;
-import com.sola.v2ex_android.ui.widget.PickerView;
+import com.sola.v2ex_android.ui.widget.PickerScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class SendTopicActivity extends BaseActivity {
      EditText etContent;
 
     @Bind(R.id.pickview)
-    PickerView mPickView;
+    PickerScrollView mPickView;
 
 
     @Override
@@ -41,13 +42,15 @@ public class SendTopicActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        List<String> ss = new ArrayList();
-        ss.add("1111111");
-        ss.add("2222222");
-        ss.add("3333333");
-        ss.add("4444444");
-        ss.add("5555555");
+        List<Pickers> ss = new ArrayList();
+        ss.add(new Pickers("11111","11111"));
+        ss.add(new Pickers("22222","22222"));
+        ss.add(new Pickers("33333","33333"));
+        ss.add(new Pickers("44444","44444"));
+        ss.add(new Pickers("55555","55555"));
+        ss.add(new Pickers("66666","66666"));
         mPickView.setData(ss);
+        mPickView.setSelected(0);
     }
 
 
