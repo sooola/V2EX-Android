@@ -1,6 +1,6 @@
 # V2EX-Android
 
-[fir.im下载地址](http://fir.im/sooooola)  
+[下载地址](https://github.com/sooola/V2EX-Android/tree/master/app/_main/release)  
 
 
 V2EX的Android客户端， RxJava & Retrofit & Glide   
