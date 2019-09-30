@@ -2,13 +2,14 @@ package com.sola.v2ex_android.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.NodeInfo;
 import com.sola.v2ex_android.model.Topics;
@@ -24,7 +25,7 @@ import com.zzhoujay.richtext.RichText;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -43,17 +44,17 @@ public class NodeDetialActivity extends BaseSwipeRefreshActivity {
     private String mNodeName;
     private TopicsAdapter mAdapter;
 
-    @Bind(R.id.appbarlayout)
+    @BindView(R.id.appbarlayout)
     AppBarLayout mAppBarLayout;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView mRecycleview;
-    @Bind(R.id.coll_toolbar_layout)
+    @BindView(R.id.coll_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @Bind(R.id.iv_node_icon)
+    @BindView(R.id.iv_node_icon)
     ImageView mUserIcon;
-    @Bind(R.id.tv_nodename)
+    @BindView(R.id.tv_nodename)
     TextView mNodeNameTv;
-    @Bind(R.id.tv_header)
+    @BindView(R.id.tv_header)
     TextView mHeader;
 
     public static Intent getIntent(Context context, String nodeName) {

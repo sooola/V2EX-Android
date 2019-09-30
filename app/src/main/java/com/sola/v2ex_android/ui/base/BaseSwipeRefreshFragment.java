@@ -3,8 +3,9 @@ package com.sola.v2ex_android.ui.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.util.LogUtil;

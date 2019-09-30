@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -44,7 +44,7 @@ public class NodeFragment extends BaseSwipeRefreshFragment {
         return new NodeFragment();
     }
 
-    @Bind(R.id.ll_root)
+    @BindView(R.id.ll_root)
     LinearLayout mContentLl;
 
     Observer<List<NodeInfo>> observer = new Observer<List<NodeInfo>>() {

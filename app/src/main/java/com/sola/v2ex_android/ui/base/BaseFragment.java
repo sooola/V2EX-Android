@@ -1,13 +1,15 @@
 package com.sola.v2ex_android.ui.base;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -18,6 +20,7 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class BaseFragment extends Fragment {
 
     private CompositeSubscription mCompositeSubscription;
+    Unbinder unbind;
 
     @Nullable
     @Override
@@ -28,7 +31,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbind = ButterKnife.bind(this, view);
         initViews(view);
         loadData();
     }
@@ -55,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbind.unbind();
         if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }

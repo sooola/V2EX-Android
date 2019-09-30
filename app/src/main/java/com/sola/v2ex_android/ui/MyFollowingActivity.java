@@ -2,9 +2,8 @@ package com.sola.v2ex_android.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.MyFollowing;
 import com.sola.v2ex_android.model.V2exUser;
@@ -16,7 +15,7 @@ import com.sola.v2ex_android.util.ToastUtil;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -30,7 +29,7 @@ import rx.schedulers.Schedulers;
 
 public class MyFollowingActivity extends BaseSwipeRefreshActivity {
 
-    @Bind(R.id.recycleview)
+    @BindView(R.id.recycleview)
     RecyclerView mRecyclerView;
 
     MyFollowingAdapter mAdapter;

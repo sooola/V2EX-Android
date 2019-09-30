@@ -2,8 +2,8 @@ package com.sola.v2ex_android.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.V2exUser;
@@ -12,7 +12,7 @@ import com.sola.v2ex_android.ui.adapter.MyNodeAdapter;
 import com.sola.v2ex_android.ui.base.BaseSwipeRefreshActivity;
 import com.sola.v2ex_android.util.JsoupUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -25,7 +25,7 @@ import rx.schedulers.Schedulers;
 
 public class MyNodeActivity extends BaseSwipeRefreshActivity {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView mRecycleview;
 
     MyNodeAdapter mAdapter;

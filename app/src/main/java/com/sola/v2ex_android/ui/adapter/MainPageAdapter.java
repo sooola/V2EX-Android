@@ -1,8 +1,9 @@
 package com.sola.v2ex_android.ui.adapter;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v13.app.FragmentPagerAdapter;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.sola.v2ex_android.ui.NewestTopicsFragment;
 import com.sola.v2ex_android.ui.NodeFragment;

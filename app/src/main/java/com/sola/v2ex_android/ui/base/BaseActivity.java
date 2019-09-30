@@ -1,14 +1,16 @@
 package com.sola.v2ex_android.ui.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.sola.v2ex_android.R;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -21,12 +23,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private CompositeSubscription mCompositeSubscription;
     Toolbar mToolbar;
+    Unbinder unbind;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+        unbind = ButterKnife.bind(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,7 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        unbind.unbind();
         if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }

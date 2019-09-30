@@ -26,7 +26,7 @@ import com.sola.v2ex_android.util.ValidateUtil;
 
 import java.util.HashMap;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
@@ -43,16 +43,16 @@ import static com.sola.v2ex_android.R.id.account;
 public class LoginActivity extends BaseSwipeRefreshActivity {
 
     // UI references.
-    @Bind(account)
+    @BindView(account)
     AutoCompleteTextView mAccountView;
 
-    @Bind(R.id.password)
+    @BindView(R.id.password)
     EditText mPasswordView;
 
-    @Bind(R.id.login_progress)
+    @BindView(R.id.login_progress)
     View mProgressView;
 
-    @Bind(R.id.login_form)
+    @BindView(R.id.login_form)
     View mLoginFormView;
 
     @OnClick(R.id.sign_in_button)

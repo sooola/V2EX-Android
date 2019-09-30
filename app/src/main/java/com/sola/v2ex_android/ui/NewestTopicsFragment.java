@@ -1,8 +1,9 @@
 package com.sola.v2ex_android.ui;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.Topics;
@@ -15,7 +16,7 @@ import com.sola.v2ex_android.util.ToastUtil;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -29,7 +30,7 @@ import rx.schedulers.Schedulers;
  */
 public class NewestTopicsFragment extends BaseSwipeRefreshFragment {
 
-    @Bind(R.id.recycleview)
+    @BindView(R.id.recycleview)
     RecyclerView mRecycleview;
 
     private TopicsAdapter mAdapter;

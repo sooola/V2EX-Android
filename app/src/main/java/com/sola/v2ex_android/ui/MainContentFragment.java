@@ -1,20 +1,21 @@
 package com.sola.v2ex_android.ui;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.ui.adapter.MainPageAdapter;
 import com.sola.v2ex_android.ui.base.BaseFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class MainContentFragment extends BaseFragment {
 
-    @Bind(R.id.vp_main)
+    @BindView(R.id.vp_main)
     ViewPager mVpMain;
-    @Bind(R.id.tabs)
+    @BindView(R.id.tabs)
     TabLayout mTabs;
 
     @Override

@@ -2,13 +2,14 @@ package com.sola.v2ex_android.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.sola.v2ex_android.R;
 import com.sola.v2ex_android.model.Topics;
 import com.sola.v2ex_android.model.UserInfo;
@@ -23,7 +24,7 @@ import com.sola.v2ex_android.util.ToastUtil;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -42,17 +43,17 @@ public class UserDetialActivity extends BaseSwipeRefreshActivity {
     private String mUserName;
     private TopicsAdapter mAdapter;
 
-    @Bind(R.id.appbarlayout)
+    @BindView(R.id.appbarlayout)
     AppBarLayout mAppBarLayout;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView mRecycleview;
-    @Bind(R.id.coll_toolbar_layout)
+    @BindView(R.id.coll_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @Bind(R.id.iv_user_icon)
+    @BindView(R.id.iv_user_icon)
     ImageView mUserIcon;
-    @Bind(R.id.tv_username)
+    @BindView(R.id.tv_username)
     TextView mUserNameTv;
-    @Bind(R.id.tv_already_join_day)
+    @BindView(R.id.tv_already_join_day)
     TextView mAlreadyJoinDay;
 
     public static Intent getIntent(Context context, String userName) {

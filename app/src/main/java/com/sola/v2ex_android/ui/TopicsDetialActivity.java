@@ -17,7 +17,7 @@ import com.sola.v2ex_android.util.LogUtil;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
@@ -36,8 +36,8 @@ public class TopicsDetialActivity extends BaseRecycleActivity<Replies> {
     private Topics mTopics;
     private String mNodeNameStr;
 
-    @Bind(R.id.tv_node_name) TextView mNodeName;
-    @Bind(R.id.tv_join_count) TextView mJoinCount;
+    @BindView(R.id.tv_node_name) TextView mNodeName;
+    @BindView(R.id.tv_join_count) TextView mJoinCount;
     @OnClick(R.id.rl_to_node_detial) void submit(View view) {
         view.getContext().startActivity(NodeDetialActivity.getIntent(this ,mNodeNameStr));
     }

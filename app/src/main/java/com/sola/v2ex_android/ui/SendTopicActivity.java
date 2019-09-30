@@ -12,7 +12,7 @@ import com.sola.v2ex_android.ui.widget.PickerScrollView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * Created by wei on 2016/12/1.
@@ -25,13 +25,13 @@ public class SendTopicActivity extends BaseActivity {
         return intent;
     }
 
-    @Bind(R.id.et_title)
+    @BindView(R.id.et_title)
      EditText etTitle;
 
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
      EditText etContent;
 
-    @Bind(R.id.pickview)
+    @BindView(R.id.pickview)
     PickerScrollView mPickView;
 
 
