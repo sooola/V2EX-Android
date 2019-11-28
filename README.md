@@ -10,7 +10,7 @@ V2EX的Android客户端， RxJava & Retrofit & Glide
 相关文章 http://www.jianshu.com/p/24c0b44f3d0b
 
 运行环境：  
-AndroidStudio 3.5.1 
+AndroidStudio 3.5.1   
 gradle:3.3.0
 
 #TODO  
